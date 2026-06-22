@@ -69,7 +69,7 @@
       letter-spacing:1.5px; cursor:pointer; transition:all .15s;
     }
     .ip-copy-btn:hover { color:#FBF0DC; border-color:#9A7B5A; }
-    .ip-copy-btn.copied { background:#2E7D32; border-color:#2E7D32; color:#FBF0DC; }
+    .ip-copy-btn.copied { background:var(--red); border-color:var(--red); color:#FBF0DC; }
     .ip-pre {
       background:#1A0F02;
       border-left:3px solid #B8860B;
@@ -129,7 +129,7 @@
       }
       .ip-copy-btn::before { content:'⎘'; font-size:18px; font-family:sans-serif; line-height:1; }
       .ip-copy-btn:hover { background:transparent; border:none; color:#B8860B; }
-      .ip-copy-btn.copied { background:transparent; border:none; color:#4caf50; }
+      .ip-copy-btn.copied { background:transparent; border:none; color:var(--red); }
       .ip-copy-btn.copied::before { content:'✓'; font-size:14px; }
       .ip-pre {
         max-width:100%; box-sizing:border-box;
@@ -744,7 +744,7 @@ go run ./cmd/seed/ --url http://localhost:8080</pre>
   function copyCode(btn) {
     const pre = btn.closest('.ip-code-header').nextElementSibling;
     navigator.clipboard.writeText(pre.textContent).then(() => {
-      btn.textContent = '&#10003; Copied';
+      btn.textContent = '✓ Copied';
       btn.classList.add('copied');
       setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
     });

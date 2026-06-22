@@ -123,7 +123,7 @@
       letter-spacing: 1.5px; cursor: pointer; transition: all .15s;
     }
     .copy-btn:hover { border-color: #B8860B; color: #D4A82A; }
-    .copy-btn.copied { background: #B8860B; border-color: #B8860B; color: #1A0F02; }
+    .copy-btn.copied { background: var(--red); border-color: var(--red); color: #FBF0DC; }
     pre.code-body {
       background: #1A0F02;
       border-left: 3px solid #B8860B;
@@ -280,7 +280,7 @@
       }
       .code-block .copy-btn::before { content: '⎘'; font-size: 17px; font-family: sans-serif; line-height: 1; }
       .code-block .copy-btn:hover { background: transparent; border: none; color: #B8860B; }
-      .code-block .copy-btn.copied { background: transparent; border: none; color: #4caf50; }
+      .code-block .copy-btn.copied { background: transparent; border: none; color: var(--red); }
       .code-block .copy-btn.copied::before { content: '✓'; font-size: 14px; }
       /* Install steps */
       .install-step { flex-direction: column; gap: 8px; }
