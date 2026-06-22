@@ -745,7 +745,7 @@ RUNRIGHT_MEMORY_GIB=16</pre>
       </div>
       <div class="faq-item">
         <div class="faq-q">What data does RunRight collect?</div>
-        <p class="faq-a">Only CI resource metrics: CPU usage, memory (RSS), disk I/O, network I/O, thread count, and wall-clock runtime per job, sampled from <code>/proc</code>. No source code, environment variables, secrets, or application output is read or transmitted.</p>
+        <p class="faq-a">RunRight samples system-level metrics from your CI runner: CPU usage, memory (RSS), disk I/O, network I/O, and thread count. These are written to your workflow artifacts and stay on your infrastructure. Nothing is sent to RunRight's servers. If you configure <code>--export otlp</code> or <code>--export http</code>, metrics go to a destination you specify.</p>
       </div>
     </div>
   </section>
@@ -771,6 +771,10 @@ RUNRIGHT_MEMORY_GIB=16</pre>
     GITHUB
   </a>
 </footer>
+<div style="text-align:center;padding:18px 24px 28px;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:#6B4F32;">
+  &copy; <span id="footer-year"></span> SEBASTIAN GBUDJE. ALL RIGHTS RESERVED. &nbsp;&middot;&nbsp; BUILT WITH CARE. ALWAYS BUILDING.
+</div>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 
 </div><!-- /lp-root -->
 
