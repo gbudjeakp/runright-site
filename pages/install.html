@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Install — RunRight Docs</title>
+  <title>Install - RunRight Docs</title>
   <meta name="description" content="Install RunRight in under two minutes. GitHub Actions, GitLab CI, Jenkins, Kubernetes, Helm, and Terraform." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -218,9 +218,9 @@
         <p class="ip-nav-group-label">Infrastructure</p>
         <a href="#kubernetes" class="ip-nav-item">Kubernetes / Self-Hosted</a>
         <a href="#helm" class="ip-nav-item">Helm (EKS / GKE / any K8s)</a>
-        <a href="#terraform-ecs" class="ip-nav-item">Terraform — ECS Fargate</a>
-        <a href="#terraform-eks" class="ip-nav-item">Terraform — EKS</a>
-        <a href="#terraform-gcp" class="ip-nav-item">Terraform — GKE</a>
+        <a href="#terraform-ecs" class="ip-nav-item">Terraform - ECS Fargate</a>
+        <a href="#terraform-eks" class="ip-nav-item">Terraform - EKS</a>
+        <a href="#terraform-gcp" class="ip-nav-item">Terraform - GKE</a>
       </div>
       <div class="ip-nav-group">
         <p class="ip-nav-group-label">Backend</p>
@@ -254,7 +254,7 @@
       <section id="overview" class="ip-section">
         <p class="ip-eyebrow">Documentation</p>
         <h1 class="ip-h1">Install RunRight</h1>
-        <p class="ip-lead">Drop one step into any CI workflow. RunRight monitors your job in the background, detects the machine it ran on, and recommends a right-sized alternative — saving you money without guesswork.</p>
+        <p class="ip-lead">Drop one step into any CI workflow. RunRight monitors your job in the background, detects the machine it ran on, and recommends a right-sized alternative - saving you money without guesswork.</p>
         <p class="ip-lead" style="margin-top:0;">No backend or API key needed to start. Just add one step, and recommendations appear in your job log and step summary.</p>
         <div class="ip-overview-grid">
           <div class="ip-overview-card"><strong class="ip-overview-title">2 min setup</strong><p class="ip-overview-body">One action step. No sidecar, no DaemonSet, no infra changes.</p></div>
@@ -266,16 +266,16 @@
 
       <!-- Quick Start -->
       <section id="no-backend" class="ip-section">
-        <h2 class="ip-h2">Quick Start — No Backend Needed</h2>
+        <h2 class="ip-h2">Quick Start - No Backend Needed</h2>
         <p class="ip-p">The fastest path: <strong>file export only</strong>. No server, no database, no API key. The agent writes a <code>metrics-summary.json</code> artifact and prints recommendations directly to the job log and step summary.</p>
         <h3 class="ip-h3">Wrapper mode (recommended)</h3>
-        <p class="ip-p">Wrap any command with <code>run:</code> — RunRight monitors it start to finish.</p>
+        <p class="ip-p">Wrap any command with <code>run:</code> - RunRight monitors it start to finish.</p>
         <div class="ip-code-block">
           <div class="ip-code-header"><span class="ip-code-label">.github/workflows/ci.yml</span><button class="ip-copy-btn" onclick="copyCode(this)">Copy</button></div>
           <pre class="ip-pre">- uses: gbudjeakp/run-right@v1
   with:
     run: make build        # ← your command here
-    # export defaults to "file" — no backend needed</pre>
+    # export defaults to "file" - no backend needed</pre>
         </div>
         <h3 class="ip-h3">Standalone mode</h3>
         <p class="ip-p">Use <code>step: start</code> / <code>step: stop</code> to span multiple steps.</p>
@@ -293,7 +293,7 @@
   with:
     step: stop</pre>
         </div>
-        <div class="ip-callout ip-callout-tip"><span class="ip-callout-label">Tip</span>Recommendations appear in the <strong>Job Summary</strong> tab of your GitHub Actions run — no extra setup required.</div>
+        <div class="ip-callout ip-callout-tip"><span class="ip-callout-label">Tip</span>Recommendations appear in the <strong>Job Summary</strong> tab of your GitHub Actions run - no extra setup required.</div>
       </section>
 
       <!-- GitHub Actions -->
@@ -346,7 +346,7 @@
       <!-- GitLab CI -->
       <section id="gitlab-ci" class="ip-section">
         <h2 class="ip-h2">GitLab CI</h2>
-        <p class="ip-p">Install the binary in <code>before_script</code> and send SIGTERM in <code>after_script</code> — which always runs even when the job fails, so data is captured on OOM kills and runner disconnects too.</p>
+        <p class="ip-p">Install the binary in <code>before_script</code> and send SIGTERM in <code>after_script</code> - which always runs even when the job fails, so data is captured on OOM kills and runner disconnects too.</p>
         <div class="ip-code-block">
           <div class="ip-code-header"><span class="ip-code-label">.gitlab-ci.yml</span><button class="ip-copy-btn" onclick="copyCode(this)">Copy</button></div>
           <pre class="ip-pre">variables:
@@ -408,7 +408,7 @@ build:
       <!-- Kubernetes -->
       <section id="kubernetes" class="ip-section">
         <h2 class="ip-h2">Kubernetes / Self-Hosted Runners</h2>
-        <p class="ip-p">RunRight runs <em>inside</em> your CI job — not as a DaemonSet or sidecar. It auto-detects CPU and memory limits from <strong>cgroup v2</strong> with no extra config on any K8s-hosted runner.</p>
+        <p class="ip-p">RunRight runs <em>inside</em> your CI job - not as a DaemonSet or sidecar. It auto-detects CPU and memory limits from <strong>cgroup v2</strong> with no extra config on any K8s-hosted runner.</p>
         <h3 class="ip-h3">GitHub Actions self-hosted on K8s</h3>
         <div class="ip-code-block">
           <div class="ip-code-header"><span class="ip-code-label">.github/workflows/ci.yml</span><button class="ip-copy-btn" onclick="copyCode(this)">Copy</button></div>
@@ -449,8 +449,8 @@ build:
 
       <!-- Helm -->
       <section id="helm" class="ip-section">
-        <h2 class="ip-h2">Helm — EKS &amp; Any Kubernetes Cluster</h2>
-        <p class="ip-p">The RunRight Helm chart deploys the backend and dashboard onto any Kubernetes cluster — EKS, GKE, AKS, or self-managed. It bundles a PostgreSQL subchart by default, or point it at an existing database with <code>externalDSN</code>.</p>
+        <h2 class="ip-h2">Helm - EKS &amp; Any Kubernetes Cluster</h2>
+        <p class="ip-p">The RunRight Helm chart deploys the backend and dashboard onto any Kubernetes cluster - EKS, GKE, AKS, or self-managed. It bundles a PostgreSQL subchart by default, or point it at an existing database with <code>externalDSN</code>.</p>
         <h3 class="ip-h3">Quick install</h3>
         <div class="ip-code-block">
           <div class="ip-code-header"><span class="ip-code-label">terminal</span><button class="ip-copy-btn" onclick="copyCode(this)">Copy</button></div>
@@ -467,7 +467,7 @@ build:
   --set externalDSN="postgres://user:pass@host:5432/runright?sslmode=require" \
   --set config.apiKey=your-secret-key</pre>
         </div>
-        <h3 class="ip-h3">With an Ingress (GKE — Cloud Load Balancer)</h3>
+        <h3 class="ip-h3">With an Ingress (GKE - Cloud Load Balancer)</h3>
         <div class="ip-code-block">
           <div class="ip-code-header"><span class="ip-code-label">values-gke.yaml</span><button class="ip-copy-btn" onclick="copyCode(this)">Copy</button></div>
           <pre class="ip-pre">ingress:
@@ -494,7 +494,7 @@ build:
 
       <!-- Terraform ECS -->
       <section id="terraform-ecs" class="ip-section">
-        <h2 class="ip-h2">Terraform — AWS ECS Fargate</h2>
+        <h2 class="ip-h2">Terraform - AWS ECS Fargate</h2>
         <p class="ip-p">The <code>terraform/</code> module deploys RunRight on AWS Fargate with RDS PostgreSQL, Secrets Manager for credentials, CloudWatch logging, and an optional ALB target group attachment.</p>
         <div class="ip-code-block">
           <div class="ip-code-header"><span class="ip-code-label">terraform/terraform.tfvars</span><button class="ip-copy-btn" onclick="copyCode(this)">Copy</button></div>
@@ -516,7 +516,7 @@ terraform apply</pre>
 
       <!-- Terraform EKS -->
       <section id="terraform-eks" class="ip-section">
-        <h2 class="ip-h2">Terraform — EKS</h2>
+        <h2 class="ip-h2">Terraform - EKS</h2>
         <p class="ip-p">The <code>terraform/eks/</code> module targets an existing EKS cluster. It provisions an optional RDS instance, creates a Kubernetes namespace and secret, then installs RunRight via the Helm chart.</p>
         <div class="ip-code-block">
           <div class="ip-code-header"><span class="ip-code-label">terraform/eks/terraform.tfvars</span><button class="ip-copy-btn" onclick="copyCode(this)">Copy</button></div>
@@ -541,7 +541,7 @@ terraform apply</pre>
 
       <!-- Terraform GKE -->
       <section id="terraform-gcp" class="ip-section">
-        <h2 class="ip-h2">Terraform — GCP GKE</h2>
+        <h2 class="ip-h2">Terraform - GCP GKE</h2>
         <p class="ip-p">The <code>terraform/gke/</code> module provisions a GKE Autopilot cluster, a Cloud SQL for PostgreSQL instance, and a Workload Identity binding so the RunRight pod can read secrets from GCP Secret Manager without a service-account key file. The Helm chart is installed via the Terraform Helm provider.</p>
         <div class="ip-code-block">
           <div class="ip-code-header"><span class="ip-code-label">terraform/gke/terraform.tfvars</span><button class="ip-copy-btn" onclick="copyCode(this)">Copy</button></div>
@@ -570,7 +570,7 @@ terraform apply</pre>
       <!-- Backend Setup -->
       <section id="backend-setup" class="ip-section">
         <h2 class="ip-h2">Self-Hosting the Backend</h2>
-        <p class="ip-p">The backend gives you persistent job history, a shared dashboard, trend charts, and PR comment recommendations. It's a single Go binary + Postgres — spin it up with Docker Compose.</p>
+        <p class="ip-p">The backend gives you persistent job history, a shared dashboard, trend charts, and PR comment recommendations. It's a single Go binary + Postgres - spin it up with Docker Compose.</p>
         <div class="ip-callout ip-callout-tip"><span class="ip-callout-label">Tip</span>Self-hosting takes about two minutes with Docker Compose. Once running, point every workflow at it with <code>http-url</code> and all job data flows to a single place your whole team can view.</div>
         <div class="ip-code-block">
           <div class="ip-code-header"><span class="ip-code-label">docker-compose.yml</span><button class="ip-copy-btn" onclick="copyCode(this)">Copy</button></div>
@@ -617,16 +617,16 @@ go run ./cmd/seed/ --url http://localhost:8080</pre>
 
       <!-- API Key -->
       <section id="api-key" class="ip-section">
-        <h2 class="ip-h2">API Key — When You Need It</h2>
-        <p class="ip-p">The API key is a <em>server-side guard</em>. It has nothing to do with getting recommendations — you get full machine sizing output without ever setting one. It only matters when you self-host the backend and want to restrict who can write to your dashboard.</p>
+        <h2 class="ip-h2">API Key - When You Need It</h2>
+        <p class="ip-p">The API key is a <em>server-side guard</em>. It has nothing to do with getting recommendations - you get full machine sizing output without ever setting one. It only matters when you self-host the backend and want to restrict who can write to your dashboard.</p>
         <div class="ip-table-wrap">
           <table class="ip-table">
             <thead><tr><th>Scenario</th><th>Need API key?</th><th>Why</th></tr></thead>
             <tbody>
-              <tr><td>File export only (no backend)</td><td class="ip-ok" style="white-space:nowrap;font-weight:600;">No</td><td>Data stays local — nothing authenticates</td></tr>
-              <tr><td>Backend, RUNRIGHT_API_KEY unset</td><td class="ip-ok" style="white-space:nowrap;font-weight:600;">No</td><td>Auth is disabled — dev mode</td></tr>
-              <tr><td>Backend, RUNRIGHT_API_KEY set</td><td class="ip-warn-text" style="white-space:nowrap;font-weight:600;">Yes — set the same key in CI</td><td>Agent sends it as Authorization: Bearer</td></tr>
-              <tr><td>Dashboard login</td><td class="ip-warn-text" style="white-space:nowrap;font-weight:600;">Yes — if backend has a key</td><td>Login screen checks it against the server</td></tr>
+              <tr><td>File export only (no backend)</td><td class="ip-ok" style="white-space:nowrap;font-weight:600;">No</td><td>Data stays local - nothing authenticates</td></tr>
+              <tr><td>Backend, RUNRIGHT_API_KEY unset</td><td class="ip-ok" style="white-space:nowrap;font-weight:600;">No</td><td>Auth is disabled - dev mode</td></tr>
+              <tr><td>Backend, RUNRIGHT_API_KEY set</td><td class="ip-warn-text" style="white-space:nowrap;font-weight:600;">Yes - set the same key in CI</td><td>Agent sends it as Authorization: Bearer</td></tr>
+              <tr><td>Dashboard login</td><td class="ip-warn-text" style="white-space:nowrap;font-weight:600;">Yes - if backend has a key</td><td>Login screen checks it against the server</td></tr>
             </tbody>
           </table>
         </div>

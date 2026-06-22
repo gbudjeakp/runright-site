@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RunRight — Stop guessing at CI machine sizes</title>
-  <meta name="description" content="RunRight monitors every CI job and maps your actual p95 usage to the right AWS or GCP instance type — automatically, on every run." />
+  <title>RunRight - CI workload profiling and right-sizing engine</title>
+  <meta name="description" content="RunRight profiles every CI job and maps your real p95 workload to the optimal AWS or GCP instance type - stop overprovisioning runners." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="styles/style.css" />
@@ -356,8 +356,9 @@
   <section class="hero" style="border-bottom:1px solid var(--border);">
     <div class="hero-left">
       <p class="eyebrow">OPEN SOURCE &middot; FREE &middot; AWS &amp; GCP</p>
-      <h1>Stop guessing at<br><em>CI machine sizes.</em></h1>
-      <p class="hero-sub">RunRight monitors every CI job and maps your actual p95 usage to the right AWS or GCP instance type, automatically, on every run.</p>
+      <h1>Stop overprovisioning<br><em>CI runners.</em></h1>
+      <p class="hero-sub">RunRight maps real CI workload usage to optimal AWS and GCP instance types - so you can size runners based on reality, not guesswork.</p>
+      <p style="font-family:var(--deco);font-size:11px;letter-spacing:2.5px;color:var(--text-light);margin-bottom:24px;">CI WORKLOAD PROFILING &amp; RIGHT-SIZING ENGINE &middot; GITHUB ACTIONS &amp; SELF-HOSTED</p>
       <a href="pages/install.html" class="btn">Install &rarr;</a>
     </div>
     <div class="hero-visual">
@@ -379,7 +380,7 @@
     </div>
   </section>
 
-</div><!-- /page — proof bar is full-width -->
+</div><!-- /page - proof bar is full-width -->
 
 <!-- Social proof bar -->
 <div class="proof-bar">
@@ -404,8 +405,8 @@
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
-        <div class="step-title">Monitor Every Run</div>
-        <p class="step-text">Add one line to your GitHub Action. RunRight samples CPU, memory, disk I/O, and threads throughout your build and stores a snapshot for every run, automatically.</p>
+        <div class="step-title">Profile Every CI Job</div>
+        <p class="step-text">Add one line to your GitHub Action. RunRight continuously samples CPU, memory, disk I/O, and threads throughout your build - producing a p95 workload profile for every run, automatically.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
@@ -414,12 +415,80 @@
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-title">Get Accurate Recommendations</div>
-        <p class="step-text">RunRight scores every instance in the AWS and GCP catalog against your real workload history and ranks options by cost, headroom, and fit. Pick the right machine with confidence.</p>
+        <div class="step-title">Convert Usage into Infrastructure Decisions</div>
+        <p class="step-text">RunRight evaluates AWS and GCP instance catalogs against your CI workload history and recommends the best-fit runner based on cost, utilization, and headroom. Concrete output. No guesswork.</p>
       </div>
     </div>
   </section>
 
+</div>
+
+<!-- Output: ranked recommendations -->
+<div style="background:var(--paper);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 48px;">
+  <div style="max-width:820px;margin:0 auto;">
+    <p style="font-family:var(--deco);font-size:11px;letter-spacing:5px;color:var(--text-light);text-align:center;margin-bottom:12px;">WHAT RUNRIGHT PRODUCES</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:900;color:var(--text);text-align:center;margin-bottom:8px;">A concrete infrastructure decision. Every run.</h2>
+    <p style="text-align:center;color:var(--text-mid);font-size:15px;margin-bottom:40px;">Not a dashboard to stare at - an output you act on.</p>
+    <!-- Job summary mockup -->
+    <div style="border:1px solid var(--border);box-shadow:var(--shadow);max-width:720px;margin:0 auto;">
+      <!-- Browser chrome -->
+      <div style="background:var(--cream-alt);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px;">
+        <div style="display:flex;gap:6px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:#e0d5c8;display:inline-block;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#e0d5c8;display:inline-block;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#e0d5c8;display:inline-block;"></span>
+        </div>
+        <span style="font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);">GITHUB ACTIONS - JOB SUMMARY</span>
+      </div>
+      <!-- Summary content -->
+      <div style="padding:28px 32px;font-size:13px;line-height:1.7;">
+        <div style="font-family:var(--deco);font-size:10px;letter-spacing:3px;color:var(--text-light);margin-bottom:4px;">RUNRIGHT - build-and-test</div>
+        <div style="font-size:12px;color:var(--text-mid);margin-bottom:20px;">Sampled 47 runs &nbsp;&middot;&nbsp; p95 CPU: <strong style="color:var(--text);">1.2 cores</strong> &nbsp;&middot;&nbsp; p95 RAM: <strong style="color:var(--text);">1.8 GB</strong> &nbsp;&middot;&nbsp; Current: <code style="font-family:monospace;background:var(--cream-alt);padding:1px 5px;font-size:11px;">c5.xlarge</code> (4 vCPU &middot; 8 GB)</div>
+        <!-- Table -->
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border);">
+              <th style="text-align:left;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px 0;font-weight:400;">RANK</th>
+              <th style="text-align:left;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px;font-weight:400;">INSTANCE</th>
+              <th style="text-align:right;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px;font-weight:400;">VCPU</th>
+              <th style="text-align:right;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px;font-weight:400;">RAM</th>
+              <th style="text-align:right;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px;font-weight:400;">COST/MIN</th>
+              <th style="text-align:right;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 0 10px 10px;font-weight:400;">SAVINGS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#fdf8f2;border-bottom:1px solid var(--border);">
+              <td style="padding:11px 10px 11px 0;"><span style="font-family:var(--deco);font-size:10px;letter-spacing:1px;color:#9A7B5A;background:var(--cream-alt);border:1px solid var(--border);padding:2px 7px;">BEST FIT</span></td>
+              <td style="padding:11px 10px;font-weight:700;color:var(--text);font-family:monospace;">t4g.small</td>
+              <td style="padding:11px 10px;text-align:right;color:var(--text-mid);">2</td>
+              <td style="padding:11px 10px;text-align:right;color:var(--text-mid);">2 GB</td>
+              <td style="padding:11px 10px;text-align:right;color:var(--text-mid);">$0.0042</td>
+              <td style="padding:11px 0 11px 10px;text-align:right;font-weight:700;color:var(--red);">-78%</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:10px 10px 10px 0;font-family:var(--deco);font-size:11px;color:var(--text-light);">2</td>
+              <td style="padding:10px;color:var(--text-mid);font-family:monospace;">t3a.small</td>
+              <td style="padding:10px;text-align:right;color:var(--text-light);">2</td>
+              <td style="padding:10px;text-align:right;color:var(--text-light);">2 GB</td>
+              <td style="padding:10px;text-align:right;color:var(--text-light);">$0.0047</td>
+              <td style="padding:10px 0 10px 10px;text-align:right;color:var(--text-mid);">-76%</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 10px 10px 0;font-family:var(--deco);font-size:11px;color:var(--text-light);">3</td>
+              <td style="padding:10px;color:var(--text-mid);font-family:monospace;">t3.small</td>
+              <td style="padding:10px;text-align:right;color:var(--text-light);">2</td>
+              <td style="padding:10px;text-align:right;color:var(--text-light);">2 GB</td>
+              <td style="padding:10px;text-align:right;color:var(--text-light);">$0.0052</td>
+              <td style="padding:10px 0 10px 10px;text-align:right;color:var(--text-mid);">-73%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:16px;padding:10px 14px;border-left:3px solid var(--red);background:var(--cream-alt);font-size:12px;color:var(--text-mid);line-height:1.6;">
+          Switching to <strong style="font-family:monospace;">t4g.small</strong> saves an estimated <strong style="color:var(--text);">$18.40/mo</strong> on this workflow at current run frequency.
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Dark features strip -->
@@ -459,8 +528,8 @@
 <!-- Works Everywhere -->
 <div class="works-section">
   <div class="works-inner">
-    <h2 style="font-family:var(--serif);font-size:32px;font-weight:900;color:var(--text);text-align:center;margin-bottom:8px;">Works Everywhere You Run CI</h2>
-    <p style="text-align:center;color:var(--text-light);margin-bottom:52px;font-size:17px;">Bare VMs, containers, K8s pods, DinD &mdash; detection adapts to the environment automatically.</p>
+    <h2 style="font-family:var(--serif);font-size:32px;font-weight:900;color:var(--text);text-align:center;margin-bottom:8px;">Built for Real CI Environments</h2>
+    <p style="text-align:center;color:var(--text-light);margin-bottom:52px;font-size:17px;">GitHub-hosted runners, self-hosted VMs, Kubernetes pods &mdash; RunRight adapts to your execution environment automatically and normalizes resource data across all of them.</p>
     <div class="works-grid">
       <div class="works-card">
         <div class="works-card-head">
@@ -670,16 +739,16 @@ RUNRIGHT_MEMORY_GIB=16</pre>
         <div>
           <label style="font-family:var(--deco);font-size:11px;letter-spacing:3px;color:var(--text-light);margin-bottom:10px;display:block;">CURRENT MACHINE</label>
           <select class="calc-select" id="calc-machine">
-            <option value="0">GitHub Actions — ubuntu-latest (4 vCPU) — $0.008/min</option>
-            <option value="1">GitHub Actions — 8-core runner — $0.016/min</option>
-            <option value="2">GitHub Actions — 16-core runner — $0.064/min</option>
-            <option value="3">Self-hosted EC2 c5.xlarge (4c / 8 GB) — $0.00283/min</option>
-            <option value="4">Self-hosted EC2 c5.2xlarge (8c / 16 GB) — $0.00567/min</option>
-            <option value="5">Self-hosted EC2 m5.xlarge (4c / 16 GB) — $0.00320/min</option>
-            <option value="6">Self-hosted EC2 m5.2xlarge (8c / 32 GB) — $0.00640/min</option>
-            <option value="7">Self-hosted GCP n2-standard-2 (2c / 8 GB) — $0.00163/min</option>
-            <option value="8">Self-hosted GCP n2-standard-4 (4c / 16 GB) — $0.00325/min</option>
-            <option value="9">Self-hosted GCP n2-standard-8 (8c / 32 GB) — $0.00651/min</option>
+            <option value="0">GitHub Actions - ubuntu-latest (4 vCPU) - $0.008/min</option>
+            <option value="1">GitHub Actions - 8-core runner - $0.016/min</option>
+            <option value="2">GitHub Actions - 16-core runner - $0.064/min</option>
+            <option value="3">Self-hosted EC2 c5.xlarge (4c / 8 GB) - $0.00283/min</option>
+            <option value="4">Self-hosted EC2 c5.2xlarge (8c / 16 GB) - $0.00567/min</option>
+            <option value="5">Self-hosted EC2 m5.xlarge (4c / 16 GB) - $0.00320/min</option>
+            <option value="6">Self-hosted EC2 m5.2xlarge (8c / 32 GB) - $0.00640/min</option>
+            <option value="7">Self-hosted GCP n2-standard-2 (2c / 8 GB) - $0.00163/min</option>
+            <option value="8">Self-hosted GCP n2-standard-4 (4c / 16 GB) - $0.00325/min</option>
+            <option value="9">Self-hosted GCP n2-standard-8 (8c / 32 GB) - $0.00651/min</option>
           </select>
         </div>
         <div>
