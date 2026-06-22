@@ -238,10 +238,10 @@ pre::-webkit-scrollbar-thumb { background: #B8860B; border-radius: 2px; }
 pre::-webkit-scrollbar-thumb:hover { background: #D4A82A; }
 
 @media (max-width: 640px) {
-  .pnav { padding: 0 20px; }
+  .pnav { padding: 0 16px; }
   .pnav-link.pnav-hide-mobile { display: none; }
   .pnav-hamburger { display: inline-flex; }
-  .page { padding: 0 20px; }
+  .page { padding: 0 14px; }
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

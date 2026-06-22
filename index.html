@@ -7,7 +7,7 @@
   <meta name="description" content="RunRight monitors every CI job and maps your actual p95 usage to the right AWS or GCP instance type — automatically, on every run." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles/style.css" />
   <style>
     /* ── Page-level extras not in shared style.css ── */
     .proof-bar {
@@ -106,24 +106,38 @@
     .ci-panel.active { display: block; }
     /* Code blocks */
     .code-header {
-      display: flex; justify-content: space-between; align-items: center;
-      background: #2C1A0E; padding: 7px 16px; border-left: 3px solid #B8860B;
+      display: flex; align-items: center; justify-content: space-between;
+      background: #2C1A0E; padding: 6px 14px;
+      border-top: 1px solid #3a2510;
+      border-left: 3px solid #B8860B;
+      border-right: 1px solid #3a2510;
     }
-    .code-label { font-family: var(--deco); font-size: 11px; letter-spacing: 2px; color: #9A7B5A; }
+    .code-label {
+      font-family: var(--deco); font-size: 11px; letter-spacing: 2px; color: #9A7B5A;
+      flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
     .copy-btn {
+      flex-shrink: 0; margin-left: 12px;
       background: transparent; border: 1px solid #4a3520; color: #9A7B5A;
-      padding: 3px 12px; font-family: var(--deco); font-size: 11px; letter-spacing: 1.5px;
-      cursor: pointer; transition: all .15s;
+      padding: 3px 12px; font-family: var(--deco); font-size: 11px;
+      letter-spacing: 1.5px; cursor: pointer; transition: all .15s;
     }
     .copy-btn:hover { border-color: #B8860B; color: #D4A82A; }
     .copy-btn.copied { background: #B8860B; border-color: #B8860B; color: #1A0F02; }
     pre.code-body {
-      background: #1A0F02; border-left: 3px solid #B8860B;
-      border-right: 1px solid #3a2510; border-bottom: 1px solid #3a2510;
-      padding: 16px 20px; font-family: 'Courier New', monospace;
+      background: #1A0F02;
+      border-left: 3px solid #B8860B;
+      border-right: 1px solid #3a2510;
+      border-bottom: 1px solid #3a2510;
+      padding: 14px 16px; font-family: 'Courier New', monospace;
       font-size: 13px; color: #D4A82A; line-height: 1.9;
-      margin: 0; overflow-x: auto; white-space: pre; max-width: 100%;
+      margin: 0; overflow-x: auto; white-space: pre;
+      max-width: 100%; box-sizing: border-box;
+      scrollbar-width: thin; scrollbar-color: #B8860B #1A0F02;
     }
+    pre.code-body::-webkit-scrollbar { height: 5px; }
+    pre.code-body::-webkit-scrollbar-track { background: #1A0F02; }
+    pre.code-body::-webkit-scrollbar-thumb { background: #B8860B; border-radius: 2px; }
     /* Install steps */
     .install-step { display: flex; gap: 28px; padding: 36px 0; border-bottom: 1px solid var(--border); }
     .install-step:first-child { padding-top: 0; }
@@ -168,71 +182,135 @@
     .calc-metric-val.red { color: var(--red); }
     .calc-sub { font-size: 12px; color: var(--text-light); margin-top: 4px; }
     .calc-disclaimer { background: var(--cream-alt); padding: 12px 14px; border-left: 3px solid var(--red); font-size: 13px; color: var(--text-mid); line-height: 1.6; }
-    /* Responsive */
+    /* ── Tablet (≤900px) ── */
     @media (max-width: 900px) {
-      /* Hero stacks, no gap since visual is hidden */
-      .hero { flex-direction: column; gap: 0; }
-      .hero-visual { display: none; }
-      /* Steps single column, tighter gap */
+      .hero { flex-direction: column; gap: 40px; padding: 52px 0 48px; }
+      .hero-visual { display: block; flex: none; width: 100%; max-width: 480px; }
       .steps { grid-template-columns: 1fr; gap: 16px; }
-      /* Feature strip 2x2 on tablet */
       .feature-strip-inner { grid-template-columns: repeat(2,1fr); gap: 24px; }
-      /* Works: single col */
       .works-grid { grid-template-columns: 1fr; }
       .works-card-full { grid-column: auto; }
       .works-inner { padding: 0 20px; }
-      /* Calculator */
       .calc-grid { grid-template-columns: 1fr; gap: 24px; }
       .calc-row { grid-template-columns: 1fr 1fr; }
-      /* Install steps stack */
       .install-step { flex-direction: column; gap: 12px; }
       .install-num { font-size: 36px; width: auto; }
       .install-step > div:last-child { min-width: 0; width: 100%; }
     }
-    @media (max-width: 600px) {
-      /* Feature strip: keep 2-col, shrink text */
-      .feature-strip-inner { grid-template-columns: repeat(2,1fr); gap: 16px; }
-      .feature-strip { padding: 40px 20px; }
-      .fstrip-title { font-size: 14px; letter-spacing: 1px; }
-      .fstrip-text { font-size: 12px; line-height: 1.6; }
-      /* Dark strips */
-      .pricing-strip { padding: 36px 20px; }
-      .compare-teaser { padding: 36px 20px; }
-      /* Savings */
-      .calc-row { grid-template-columns: 1fr; }
-      .calc-metric-val { font-size: 26px; }
-      .calc-output { padding: 24px 20px; }
-      /* Proof bar */
-      .proof-bar { justify-content: flex-start; flex-wrap: wrap; }
-      /* CI tabs: horizontal scroll */
-      .ci-tabs-bar { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
-      .ci-tab { flex-shrink: 0; }
-      /* Steps redesign: remove card boxes, use left-border list style */
-      .steps { gap: 0; }
-      .step {
-        background: transparent;
+    /* ── Mobile redesign (≤640px) ── */
+    @media (max-width: 640px) {
+      /* Hero: stacked with metrics card anchored below text */
+      .hero { padding: 28px 0 0; flex-direction: column; gap: 0; }
+      .hero h1 { font-size: clamp(30px,9vw,40px); }
+      .hero-sub { font-size: 15px; max-width: 100%; margin-bottom: 20px; }
+      .eyebrow { font-size: 10px; letter-spacing: 3px; padding: 4px 12px; margin-bottom: 16px; }
+      .hero-visual {
+        display: block; flex: none; width: 100%;
+        margin-top: 24px; padding: 16px 20px;
+        font-size: 11px; line-height: 1.65;
         border: none;
-        border-left: 3px solid var(--border);
-        box-shadow: none;
-        padding: 0 0 28px 20px;
-        margin-bottom: 0;
+        border-top: 1px solid #3a2510;
+        border-left: 3px solid #B8860B;
       }
-      .step:last-child { padding-bottom: 0; }
-      .step-num { font-size: 26px; color: var(--red); margin-bottom: 4px; }
-      .step-title { font-size: 16px; margin-bottom: 6px; }
-      .step-text { font-size: 14px; }
+      /* Proof bar: horizontal scrolling ticker */
+      .proof-bar {
+        padding: 0; gap: 0; flex-wrap: nowrap;
+        overflow-x: auto; justify-content: flex-start;
+        -webkit-overflow-scrolling: touch; border-top: none;
+      }
+      .proof-bar span {
+        padding: 11px 18px; flex-shrink: 0;
+        border-right: 1px solid var(--border);
+        font-size: 10px; letter-spacing: 2px; white-space: nowrap;
+      }
       /* Divider ornament */
       .divider-ornament { padding: 0 20px; }
       .divider-ornament span { font-size: 11px; letter-spacing: 2px; }
+      /* Sections */
+      .section { padding: 40px 0; }
+      .section h2 { font-size: 24px; }
+      .section-sub { font-size: 15px; margin-bottom: 28px; }
+      /* Steps: dot timeline */
+      .steps { gap: 0; }
+      .step {
+        background: transparent; border: none;
+        border-left: 2px solid var(--border);
+        box-shadow: none; padding: 0 0 32px 20px;
+        position: relative;
+      }
+      .step::before {
+        content: ''; position: absolute;
+        left: -5px; top: 5px;
+        width: 8px; height: 8px;
+        background: var(--red); border-radius: 50%;
+      }
+      .step:last-child { padding-bottom: 0; border-left-color: transparent; }
+      .step-num { font-size: 10px; font-family: var(--deco); color: var(--red); letter-spacing: 3px; line-height: 1; margin-bottom: 8px; }
+      .step-title { font-size: 16px; margin-bottom: 8px; }
+      .step-text { font-size: 14px; line-height: 1.7; }
+      /* Feature strip: single-col horizontal icon rows */
+      .feature-strip { padding: 36px 20px; }
+      .feature-strip-inner { grid-template-columns: 1fr; gap: 0; }
+      .fstrip-item {
+        flex-direction: row; align-items: flex-start; gap: 16px;
+        text-align: left; padding: 16px 0;
+        border-bottom: 1px solid rgba(251,240,220,.08);
+      }
+      .fstrip-item:last-child { border-bottom: none; padding-bottom: 0; }
+      .fstrip-icon { flex-shrink: 0; margin-bottom: 0; }
+      .fstrip-title { font-size: 14px; letter-spacing: 1.5px; margin-bottom: 4px; }
+      .fstrip-text { font-size: 13px; line-height: 1.6; }
       /* Works cards */
-      .works-card { padding: 20px 16px; overflow: hidden; }
-      /* Code blocks: smaller on mobile so more fits before scrolling */
-      pre.code-body { font-size: 11px; padding: 12px 14px; }
-      .code-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      /* CTA section */
-      .cta-section { padding: 44px 20px; }
+      .works-card { padding: 20px 16px; }
+      .works-card pre { max-width: 100%; overflow-x: auto; }
+      /* CI tabs: stack vertically on mobile */
+      .ci-tabs-bar { flex-direction: column; overflow-x: visible; flex-wrap: wrap; border-bottom: none; }
+      .ci-tab { width: 100%; text-align: left; border: none; border-bottom: 1px solid var(--border); border-left: 3px solid transparent; padding: 11px 16px; font-size: 12px; letter-spacing: 1.5px; }
+      .ci-tab:last-child { border-bottom: none; }
+      .ci-tab.active { border-bottom-color: var(--border); border-left-color: #B8860B; }
+      /* ── Code blocks (mobile) ── */
+      pre.code-body { font-size: 10px; padding: 10px 12px; }
+      .code-block .code-header { padding: 4px 4px 4px 12px; }
+      .code-block .code-label { font-size: 10px; letter-spacing: 1px; }
+      /* Icon-only copy button: ⎘ glyph, 44px touch target */
+      .code-block .copy-btn {
+        width: 44px; height: 36px; padding: 0; margin-left: 6px;
+        font-size: 0; letter-spacing: 0; border: none;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .code-block .copy-btn::before { content: '⎘'; font-size: 17px; font-family: sans-serif; line-height: 1; }
+      .code-block .copy-btn:hover { background: transparent; border: none; color: #B8860B; }
+      .code-block .copy-btn.copied { background: transparent; border: none; color: #4caf50; }
+      .code-block .copy-btn.copied::before { content: '✓'; font-size: 14px; }
+      /* Install steps */
+      .install-step { flex-direction: column; gap: 8px; }
+      .install-num { font-size: 32px; width: auto; }
+      /* Dark strips */
+      .pricing-strip { padding: 40px 20px; }
+      .compare-teaser { padding: 40px 20px; }
+      /* Calculator */
+      .calc-row { grid-template-columns: 1fr; }
+      .calc-metric-val { font-size: 26px; }
+      .calc-output { padding: 24px 20px; }
+      /* CTA */
+      .cta-section { padding: 48px 20px; }
+      .btn { display: block; text-align: center; padding: 15px 24px; font-size: 14px; }
       /* FAQ */
       .faq-item { padding: 18px 0; }
+      .faq-q { font-size: 14px; }
+      .faq-a { font-size: 13px; }
+      /* ── Works Everywhere: 320px fixes ── */
+      .works-card { min-width: 0; }
+      .works-card-head { flex-wrap: wrap; gap: 6px; }
+      .works-card pre {
+        white-space: pre-wrap !important;
+        word-break: break-word !important;
+        font-size: 10px !important;
+        line-height: 1.7 !important;
+      }
+      .works-section h2 { font-size: 22px !important; }
+      .works-inner > p { font-size: 14px !important; margin-bottom: 28px !important; }
+      .works-badge { font-size: 9px; padding: 1px 5px; }
     }
   </style>
 </head>
@@ -245,9 +323,9 @@
     RUNRIGHT
   </a>
   <div class="pnav-right">
-    <a href="compare.html" class="pnav-link pnav-hide-mobile">Compare</a>
-    <a href="pricing.html" class="pnav-link pnav-hide-mobile">Pricing</a>
-    <a href="install.html" class="pnav-link pnav-hide-mobile">Install</a>
+    <a href="pages/compare.html" class="pnav-link pnav-hide-mobile">Compare</a>
+    <a href="pages/pricing.html" class="pnav-link pnav-hide-mobile">Pricing</a>
+    <a href="pages/install.html" class="pnav-link pnav-hide-mobile">Install</a>
     <a href="https://github.com/gbudjeakp/run-right" class="pnav-link pnav-hide-mobile pnav-github" aria-label="GitHub repository" target="_blank" rel="noopener">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
     </a>
@@ -255,6 +333,20 @@
       <svg id="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg id="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
+    <button class="pnav-hamburger" id="pnav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+  <div class="pnav-mobile" id="pnav-mobile" aria-hidden="true">
+    <a href="pages/compare.html" class="pnav-mobile-link">Compare</a>
+    <a href="pages/pricing.html" class="pnav-mobile-link">Pricing</a>
+    <a href="pages/install.html" class="pnav-mobile-link">Install</a>
+    <a href="https://github.com/gbudjeakp/run-right" class="pnav-mobile-link" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
+      GitHub
+    </a>
   </div>
 </nav>
 
@@ -266,7 +358,7 @@
       <p class="eyebrow">OPEN SOURCE &middot; FREE &middot; AWS &amp; GCP</p>
       <h1>Stop guessing at<br><em>CI machine sizes.</em></h1>
       <p class="hero-sub">RunRight monitors every CI job and maps your actual p95 usage to the right AWS or GCP instance type, automatically, on every run.</p>
-      <a href="install.html" class="btn">Install &rarr;</a>
+      <a href="pages/install.html" class="btn">Install &rarr;</a>
     </div>
     <div class="hero-visual">
       <div class="hv-label" style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #4a2e18;">RUNRIGHT &middot; build-and-test</div>
@@ -422,18 +514,21 @@ RUNRIGHT_MEMORY_GIB=16</pre>
       <button class="ci-tab" data-tab="jenkins">Jenkins</button>
     </div>
     <div id="tab-github" class="ci-panel active">
-      <div class="code-header"><span class="code-label">.github/workflows/ci.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-      <pre class="code-body">- uses: gbudjeakp/run-right@v1
+      <div class="code-block">
+        <div class="code-header"><span class="code-label">.github/workflows/ci.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre class="code-body">- uses: gbudjeakp/run-right@v1
   with:
     run: make build
     export: file,http
     http-url: ${{ vars.RUNRIGHT_URL }}
   env:
     RUNRIGHT_API_KEY: ${{ secrets.RUNRIGHT_API_KEY }}</pre>
+      </div>
     </div>
     <div id="tab-gitlab" class="ci-panel">
-      <div class="code-header"><span class="code-label">.gitlab-ci.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-      <pre class="code-body">build:
+      <div class="code-block">
+        <div class="code-header"><span class="code-label">.gitlab-ci.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre class="code-body">build:
   before_script:
     - curl -fsSL "https://github.com/gbudjeakp/run-right/releases/latest/download/runright_linux_amd64" -o runright && chmod +x runright
     - ./runright monitor --export http --http-url "$RUNRIGHT_URL" &
@@ -442,10 +537,12 @@ RUNRIGHT_MEMORY_GIB=16</pre>
     - make build
   after_script:
     - kill $(cat .runright.pid) 2>/dev/null || true</pre>
+      </div>
     </div>
     <div id="tab-circleci" class="ci-panel">
-      <div class="code-header"><span class="code-label">.circleci/config.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-      <pre class="code-body">jobs:
+      <div class="code-block">
+        <div class="code-header"><span class="code-label">.circleci/config.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre class="code-body">jobs:
   build:
     docker:
       - image: cimg/base:stable
@@ -461,10 +558,12 @@ RUNRIGHT_MEMORY_GIB=16</pre>
             echo $! > .runright.pid
             make build
             kill $(cat .runright.pid) 2>/dev/null || true</pre>
+      </div>
     </div>
     <div id="tab-bitbucket" class="ci-panel">
-      <div class="code-header"><span class="code-label">bitbucket-pipelines.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-      <pre class="code-body">pipelines:
+      <div class="code-block">
+        <div class="code-header"><span class="code-label">bitbucket-pipelines.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre class="code-body">pipelines:
   default:
     - step:
         script:
@@ -473,10 +572,12 @@ RUNRIGHT_MEMORY_GIB=16</pre>
           - echo $! > .runright.pid
           - make build
           - kill $(cat .runright.pid) 2>/dev/null || true</pre>
+      </div>
     </div>
     <div id="tab-jenkins" class="ci-panel">
-      <div class="code-header"><span class="code-label">Jenkinsfile</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-      <pre class="code-body">pipeline {
+      <div class="code-block">
+        <div class="code-header"><span class="code-label">Jenkinsfile</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+        <pre class="code-body">pipeline {
   agent any
   environment {
     RUNRIGHT_URL     = credentials('runright-url')
@@ -496,6 +597,7 @@ RUNRIGHT_MEMORY_GIB=16</pre>
     }
   }
 }</pre>
+      </div>
     </div>
 
     <!-- Install steps -->
@@ -509,8 +611,10 @@ RUNRIGHT_MEMORY_GIB=16</pre>
           <div>
             <div class="install-title">Generate an API key</div>
             <p class="install-desc">RunRight authenticates the agent to the backend with a single shared secret. Generate one now and keep it in your CI secrets.</p>
-            <div class="code-header"><span class="code-label"></span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre class="code-body">export RUNRIGHT_API_KEY=$(openssl rand -hex 32)</pre>
+            <div class="code-block">
+              <div class="code-header"><span class="code-label"></span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+              <pre class="code-body">export RUNRIGHT_API_KEY=$(openssl rand -hex 32)</pre>
+            </div>
           </div>
         </div>
         <div class="install-step">
@@ -518,8 +622,10 @@ RUNRIGHT_MEMORY_GIB=16</pre>
           <div>
             <div class="install-title">Start everything with Docker</div>
             <p class="install-desc">One command starts the backend, dashboard, and Postgres. The dashboard is available at <code style="font-family:monospace;background:var(--cream-alt);padding:1px 4px;font-size:12px;">localhost:3000</code> once it's up.</p>
-            <div class="code-header"><span class="code-label"></span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre class="code-body">docker compose up -d</pre>
+            <div class="code-block">
+              <div class="code-header"><span class="code-label"></span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+              <pre class="code-body">docker compose up -d</pre>
+            </div>
           </div>
         </div>
         <div class="install-step">
@@ -527,14 +633,16 @@ RUNRIGHT_MEMORY_GIB=16</pre>
           <div>
             <div class="install-title">Add the step to your CI workflow</div>
             <p class="install-desc">Drop the RunRight step into any job above. It runs as a background process, samples every few seconds, and posts a summary when the job finishes. Your existing steps are untouched.</p>
-            <div class="code-header"><span class="code-label">.github/workflows/ci.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-            <pre class="code-body">- uses: gbudjeakp/run-right@v1
+            <div class="code-block">
+              <div class="code-header"><span class="code-label">.github/workflows/ci.yml</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+              <pre class="code-body">- uses: gbudjeakp/run-right@v1
   with:
     run: make build
     export: file,http
     http-url: ${{ vars.RUNRIGHT_URL }}
   env:
     RUNRIGHT_API_KEY: ${{ secrets.RUNRIGHT_API_KEY }}</pre>
+            </div>
           </div>
         </div>
       </div>
@@ -546,7 +654,7 @@ RUNRIGHT_MEMORY_GIB=16</pre>
 <!-- Compare teaser -->
 <div class="compare-teaser">
   <p>How does RunRight compare to Datadog, Grafana, Sentry, and AWS Cost Tools?</p>
-  <a href="compare.html">See the full comparison &rarr;</a>
+  <a href="pages/compare.html">See the full comparison &rarr;</a>
 </div>
 
 <div class="page">
@@ -614,7 +722,7 @@ RUNRIGHT_MEMORY_GIB=16</pre>
   <p class="eyebrow">PRICING</p>
   <div class="price-big">It's free.</div>
   <p>No seats, no usage caps, no SaaS. Self-hosted on your infrastructure.</p>
-  <a href="pricing.html">See full pricing &rarr;</a>
+  <a href="pages/pricing.html">See full pricing &rarr;</a>
 </div>
 
 <div class="page">
@@ -642,7 +750,7 @@ RUNRIGHT_MEMORY_GIB=16</pre>
   <div class="cta-section">
     <p style="font-family:var(--deco);font-size:12px;letter-spacing:4px;color:var(--text-light);margin-bottom:16px;">READY TO START SAVING?</p>
     <h2 style="font-family:var(--serif);font-size:clamp(28px,3.5vw,40px);font-weight:900;color:var(--text);margin-bottom:28px;">Right-size your CI today.</h2>
-    <a href="install.html" class="btn">Open Install Guide &rarr;</a>
+    <a href="pages/install.html" class="btn">Open Install Guide &rarr;</a>
   </div>
 
 </div>
@@ -663,6 +771,25 @@ RUNRIGHT_MEMORY_GIB=16</pre>
 </div><!-- /lp-root -->
 
 <script>
+  // ── Mobile nav menu ──
+  const navEl = document.querySelector('.pnav');
+  const hamburger = document.getElementById('pnav-hamburger');
+  const mobileMenu = document.getElementById('pnav-mobile');
+  if (hamburger && mobileMenu && navEl) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = navEl.classList.toggle('pnav-open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    });
+    document.addEventListener('click', (e) => {
+      if (navEl.classList.contains('pnav-open') && !navEl.contains(e.target)) {
+        navEl.classList.remove('pnav-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
   // ── Dark mode ──
   const root = document.getElementById('root');
   if (localStorage.getItem('rr-dark') === 'true') applyDark(true);

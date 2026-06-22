@@ -7,7 +7,7 @@
   <meta name="description" content="Install RunRight in under two minutes. GitHub Actions, GitLab CI, Jenkins, Kubernetes, Helm, and Terraform." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../styles/style.css" />
   <style>
     /* InstallPage.css */
     .ip-root { display:flex; flex-direction:column; min-height:100vh; background:var(--lp-bg); color:var(--lp-text); font-family:'Lato',system-ui,sans-serif; }
@@ -51,12 +51,39 @@
     .ip-overview-body { font-size:13px; color:var(--lp-text-mid); line-height:1.6; margin:0; }
     /* Code blocks */
     .ip-code-block { margin:14px 0 20px; }
-    .ip-code-header { display:flex; justify-content:space-between; align-items:center; background:#2C1A0E; padding:7px 16px; border-left:3px solid #B8860B; }
-    .ip-code-label { font-family:'Bebas Neue',Impact,sans-serif; font-size:11px; letter-spacing:2px; color:#9A7B5A; }
-    .ip-copy-btn { background:transparent; border:1px solid #4a3520; color:#9A7B5A; padding:3px 12px; font-family:'Bebas Neue',Impact,sans-serif; font-size:11px; letter-spacing:1.5px; cursor:pointer; transition:all .15s; }
+    .ip-code-header {
+      display:flex; align-items:center; justify-content:space-between;
+      background:#2C1A0E; padding:6px 14px;
+      border-top:1px solid #3a2510;
+      border-left:3px solid #B8860B;
+      border-right:1px solid #3a2510;
+    }
+    .ip-code-label {
+      font-family:'Bebas Neue',Impact,sans-serif; font-size:11px; letter-spacing:2px; color:#9A7B5A;
+      flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    .ip-copy-btn {
+      flex-shrink:0; margin-left:12px;
+      background:transparent; border:1px solid #4a3520; color:#9A7B5A;
+      padding:3px 12px; font-family:'Bebas Neue',Impact,sans-serif; font-size:11px;
+      letter-spacing:1.5px; cursor:pointer; transition:all .15s;
+    }
     .ip-copy-btn:hover { color:#FBF0DC; border-color:#9A7B5A; }
     .ip-copy-btn.copied { background:#2E7D32; border-color:#2E7D32; color:#FBF0DC; }
-    .ip-pre { background:#1A0F02; border-left:3px solid #B8860B; border-right:1px solid #3a2510; border-bottom:1px solid #3a2510; padding:16px 20px; font-family:'Courier New',monospace; font-size:13px; color:#D4A82A; line-height:1.9; margin:0; overflow-x:auto; white-space:pre; }
+    .ip-pre {
+      background:#1A0F02;
+      border-left:3px solid #B8860B;
+      border-right:1px solid #3a2510;
+      border-bottom:1px solid #3a2510;
+      padding:14px 16px; font-family:'Courier New',monospace;
+      font-size:13px; color:#D4A82A; line-height:1.9;
+      margin:0; overflow-x:auto; white-space:pre;
+      max-width:100%; box-sizing:border-box;
+      scrollbar-width:thin; scrollbar-color:#B8860B #1A0F02;
+    }
+    .ip-pre::-webkit-scrollbar { height:5px; }
+    .ip-pre::-webkit-scrollbar-track { background:#1A0F02; }
+    .ip-pre::-webkit-scrollbar-thumb { background:#B8860B; border-radius:2px; }
     /* Callouts */
     .ip-callout { padding:14px 18px; margin:18px 0; font-size:14px; line-height:1.75; color:var(--lp-text-mid); }
     .ip-callout-label { display:block; font-family:'Bebas Neue',Impact,sans-serif; font-size:11px; letter-spacing:2px; margin-bottom:6px; }
@@ -79,54 +106,35 @@
     .ip-footer-link { color:var(--lp-text-light); text-decoration:none; transition:color .12s; }
     .ip-footer-link:hover { color:var(--lp-text); }
     @media (max-width:768px) {
-      .ip-body { flex-direction:column; padding:0; }
+      .ip-body { flex-direction:column; padding:0; align-items:stretch; }
       .ip-sidebar { display:none; }
-      .ip-content { padding:24px 16px 60px; }
+      .ip-content { padding:20px 12px 60px; width:100%; }
       .ip-overview-grid { grid-template-columns:1fr; }
       .ip-footer { padding:20px; }
       .ip-quickstart { padding:20px 16px; margin-bottom:28px; }
-      /* Quickstart code: wrap instead of horizontal scroll */
-      .ip-qs-code { font-size:11px; white-space:pre-wrap; overflow-wrap:break-word; overflow-x:visible; }
+      /* Quickstart code: horizontal scroll */
+      .ip-qs-code { font-size:11px; white-space:pre; overflow-x:auto; }
       .ip-h1 { font-size:clamp(26px,7vw,36px); }
       .ip-h2 { font-size:20px; }
       .ip-table th, .ip-table td { padding:8px 10px; font-size:12.5px; }
-      /* ── Mobile code blocks: wrap + full-width copy button ── */
-      /* display:contents flattens .ip-code-header so label/button become
-         direct flex children of .ip-code-block, enabling order reflow    */
-      .ip-code-block { display:flex; flex-direction:column; }
-      .ip-code-header { display:contents; }
-      .ip-code-label {
-        order:1; display:block;
-        padding:6px 14px;
-        background:#2C1A0E;
-        border-top:1px solid #3a2510;
-        border-left:3px solid #B8860B;
-        border-right:1px solid #3a2510;
-      }
-      .ip-pre {
-        order:2;
-        font-size:11px; padding:12px 14px;
-        white-space:pre-wrap; overflow-wrap:break-word; overflow-x:visible;
-        border-bottom:none;
-      }
+      /* ── Code blocks (mobile) ── */
+      .ip-code-block { display:block; overflow:hidden; }
+      .ip-code-header { padding:4px 4px 4px 12px; }
+      .ip-code-label { font-size:10px; letter-spacing:1px; }
+      /* Icon-only copy button on mobile: ⎘ glyph, 44px touch target */
       .ip-copy-btn {
-        order:3; width:100%; padding:12px;
-        text-align:center; letter-spacing:2.5px; font-size:11px;
-        background:rgba(184,134,11,.07); color:#B8860B;
-        border:none;
-        border-left:3px solid #B8860B;
-        border-right:1px solid #3a2510;
-        border-bottom:1px solid #3a2510;
-        border-top:1px solid #4a3520;
-        min-height:44px;
+        width:44px; height:36px; padding:0; margin-left:6px;
+        font-size:0; letter-spacing:0; border:none;
+        display:flex; align-items:center; justify-content:center;
       }
-      .ip-copy-btn:hover { background:rgba(184,134,11,.14); }
-      .ip-copy-btn.copied {
-        background:rgba(46,125,50,.12); color:#4caf50;
-        border-left-color:#2E7D32;
-        border-top-color:rgba(46,125,50,.25);
-        border-right-color:rgba(46,125,50,.25);
-        border-bottom-color:rgba(46,125,50,.25);
+      .ip-copy-btn::before { content:'⎘'; font-size:18px; font-family:sans-serif; line-height:1; }
+      .ip-copy-btn:hover { background:transparent; border:none; color:#B8860B; }
+      .ip-copy-btn.copied { background:transparent; border:none; color:#4caf50; }
+      .ip-copy-btn.copied::before { content:'✓'; font-size:14px; }
+      .ip-pre {
+        max-width:100%; box-sizing:border-box;
+        font-size:10px; padding:10px 12px;
+        white-space:pre; overflow-x:auto;
       }
     }
     @media (max-width:480px) {
@@ -139,7 +147,7 @@
       .ip-lead { font-size:14px; }
       .ip-p { font-size:13px; }
       .ip-pre { font-size:10px; }
-      .ip-copy-btn { font-size:10px; letter-spacing:2px; padding:10px; }
+      .ip-copy-btn { width:38px; height:38px; }
       .ip-overview-card { padding:14px; }
       .ip-overview-title { font-size:12px; }
       .ip-overview-body { font-size:12px; }
@@ -158,7 +166,7 @@
 <div class="lp-root ip-root" id="root">
 
   <nav class="pnav">
-    <a href="index.html" class="pnav-logo">
+    <a href="../index.html" class="pnav-logo">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="4" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="12" x2="17.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="12" x2="17.2" y2="7.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
       RUNRIGHT
     </a>
@@ -692,7 +700,7 @@ go run ./cmd/seed/ --url http://localhost:8080</pre>
   <footer class="ip-footer">
     <span style="display:flex;align-items:center;gap:8px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="4" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="12" x2="17.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="12" x2="17.2" y2="7.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>RUNRIGHT</span>
     <div style="display:flex;gap:24px;">
-      <a href="index.html" class="ip-footer-link">Home</a>
+      <a href="../index.html" class="ip-footer-link">Home</a>
       <a href="https://github.com/gbudjeakp/run-right" target="_blank" rel="noopener noreferrer" class="ip-footer-link">GitHub</a>
     </div>
   </footer>
