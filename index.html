@@ -81,7 +81,8 @@
     .fstrip-title { font-family: var(--deco); font-size: 17px; letter-spacing: 2px; color: #FBF0DC; margin-bottom: 10px; }
     .fstrip-text { font-size: 14px; color: rgba(251,240,220,.65); line-height: 1.75; }
     /* Works everywhere */
-    .works-section { background: var(--cream-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 72px 48px; }
+    .works-section { background: var(--cream-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 72px 0; }
+    .works-inner { max-width: 900px; margin: 0 auto; padding: 0 48px; }
     .works-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
     .works-card { background: var(--paper); border: 1px solid var(--border); padding: 28px; box-shadow: var(--shadow); }
     .works-card-full { grid-column: 1 / -1; }
@@ -115,7 +116,7 @@
       cursor: pointer; transition: all .15s;
     }
     .copy-btn:hover { border-color: #B8860B; color: #D4A82A; }
-    .copy-btn.copied { background: #2E7D32; border-color: #2E7D32; color: #FBF0DC; }
+    .copy-btn.copied { background: #B8860B; border-color: #B8860B; color: #1A0F02; }
     pre.code-body {
       background: #1A0F02; border-left: 3px solid #B8860B;
       border-right: 1px solid #3a2510; border-bottom: 1px solid #3a2510;
@@ -169,22 +170,69 @@
     .calc-disclaimer { background: var(--cream-alt); padding: 12px 14px; border-left: 3px solid var(--red); font-size: 13px; color: var(--text-mid); line-height: 1.6; }
     /* Responsive */
     @media (max-width: 900px) {
-      .hero { flex-direction: column; gap: 40px; }
+      /* Hero stacks, no gap since visual is hidden */
+      .hero { flex-direction: column; gap: 0; }
       .hero-visual { display: none; }
-      .steps { grid-template-columns: 1fr; }
-      .feature-strip-inner { grid-template-columns: repeat(2,1fr); }
+      /* Steps single column, tighter gap */
+      .steps { grid-template-columns: 1fr; gap: 16px; }
+      /* Feature strip 2x2 on tablet */
+      .feature-strip-inner { grid-template-columns: repeat(2,1fr); gap: 24px; }
+      /* Works: single col */
       .works-grid { grid-template-columns: 1fr; }
       .works-card-full { grid-column: auto; }
-      .calc-grid { grid-template-columns: 1fr; gap: 28px; }
+      .works-inner { padding: 0 20px; }
+      /* Calculator */
+      .calc-grid { grid-template-columns: 1fr; gap: 24px; }
       .calc-row { grid-template-columns: 1fr 1fr; }
+      /* Install steps stack */
       .install-step { flex-direction: column; gap: 12px; }
       .install-num { font-size: 36px; width: auto; }
+      .install-step > div:last-child { min-width: 0; width: 100%; }
     }
     @media (max-width: 600px) {
-      .feature-strip-inner { grid-template-columns: 1fr; }
+      /* Feature strip: keep 2-col, shrink text */
+      .feature-strip-inner { grid-template-columns: repeat(2,1fr); gap: 16px; }
+      .feature-strip { padding: 40px 20px; }
+      .fstrip-title { font-size: 14px; letter-spacing: 1px; }
+      .fstrip-text { font-size: 12px; line-height: 1.6; }
+      /* Dark strips */
+      .pricing-strip { padding: 36px 20px; }
+      .compare-teaser { padding: 36px 20px; }
+      /* Savings */
       .calc-row { grid-template-columns: 1fr; }
-      .proof-bar { gap: 20px; }
-      .ci-tab { font-size: 11px; padding: 8px 12px; }
+      .calc-metric-val { font-size: 26px; }
+      .calc-output { padding: 24px 20px; }
+      /* Proof bar */
+      .proof-bar { justify-content: flex-start; flex-wrap: wrap; }
+      /* CI tabs: horizontal scroll */
+      .ci-tabs-bar { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+      .ci-tab { flex-shrink: 0; }
+      /* Steps redesign: remove card boxes, use left-border list style */
+      .steps { gap: 0; }
+      .step {
+        background: transparent;
+        border: none;
+        border-left: 3px solid var(--border);
+        box-shadow: none;
+        padding: 0 0 28px 20px;
+        margin-bottom: 0;
+      }
+      .step:last-child { padding-bottom: 0; }
+      .step-num { font-size: 26px; color: var(--red); margin-bottom: 4px; }
+      .step-title { font-size: 16px; margin-bottom: 6px; }
+      .step-text { font-size: 14px; }
+      /* Divider ornament */
+      .divider-ornament { padding: 0 20px; }
+      .divider-ornament span { font-size: 11px; letter-spacing: 2px; }
+      /* Works cards */
+      .works-card { padding: 20px 16px; overflow: hidden; }
+      /* Code blocks: smaller on mobile so more fits before scrolling */
+      pre.code-body { font-size: 11px; padding: 12px 14px; }
+      .code-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      /* CTA section */
+      .cta-section { padding: 44px 20px; }
+      /* FAQ */
+      .faq-item { padding: 18px 0; }
     }
   </style>
 </head>
@@ -217,7 +265,7 @@
     <div class="hero-left">
       <p class="eyebrow">OPEN SOURCE &middot; FREE &middot; AWS &amp; GCP</p>
       <h1>Stop guessing at<br><em>CI machine sizes.</em></h1>
-      <p class="hero-sub">RunRight monitors every CI job and maps your actual p95 usage to the right AWS or GCP instance type &mdash; automatically, on every run.</p>
+      <p class="hero-sub">RunRight monitors every CI job and maps your actual p95 usage to the right AWS or GCP instance type, automatically, on every run.</p>
       <a href="install.html" class="btn">Install &rarr;</a>
     </div>
     <div class="hero-visual">
@@ -260,7 +308,6 @@
 
   <!-- How it works -->
   <section class="section">
-    <p style="font-family:var(--deco);font-size:11px;letter-spacing:4px;color:var(--text-light);text-align:center;margin-bottom:12px;">HOW IT WORKS</p>
     <h2 style="text-align:center;margin-bottom:48px;">Three steps. No code changes.</h2>
     <div class="steps">
       <div class="step">
@@ -319,7 +366,7 @@
 
 <!-- Works Everywhere -->
 <div class="works-section">
-  <div style="max-width:900px;margin:0 auto;">
+  <div class="works-inner">
     <h2 style="font-family:var(--serif);font-size:32px;font-weight:900;color:var(--text);text-align:center;margin-bottom:8px;">Works Everywhere You Run CI</h2>
     <p style="text-align:center;color:var(--text-light);margin-bottom:52px;font-size:17px;">Bare VMs, containers, K8s pods, DinD &mdash; detection adapts to the environment automatically.</p>
     <div class="works-grid">
@@ -336,7 +383,7 @@
           <span class="works-badge badge-navy">CONTAINER-AWARE</span>
         </div>
         <p style="font-size:14px;color:var(--text-mid);line-height:1.85;margin-bottom:14px;">Reads cgroup v2 (<code style="font-family:monospace;background:var(--cream-alt);padding:1px 4px;font-size:12px;">cpu.max</code>, <code style="font-family:monospace;background:var(--cream-alt);padding:1px 4px;font-size:12px;">memory.max</code>) or cgroup v1 equivalents. Reflects your pod's actual CPU quota and memory limit.</p>
-        <pre style="background:#1A0F02;padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#D4A82A;border-left:3px solid #B8860B;line-height:1.85;margin:0;overflow-x:auto;"># K8s Downward API override (optional)
+        <pre style="background:#1A0F02;padding:10px 14px;font-family:'Courier New',monospace;font-size:11px;color:#D4A82A;border-left:3px solid #B8860B;line-height:1.85;margin:0;overflow-x:auto;max-width:100%;white-space:pre;"># K8s Downward API override (optional)
 env:
   - name: RUNRIGHT_VCPUS
     valueFrom:
@@ -354,7 +401,7 @@ env:
           <span class="works-badge badge-gold">MANUAL OVERRIDE</span>
         </div>
         <p style="font-size:14px;color:var(--text-mid);line-height:1.85;margin-bottom:14px;">Skip auto-detection with two env vars. Works for Azure VMs, ARM instances, on-prem, or any environment where OS-level resource counts are unreliable.</p>
-        <pre style="background:#1A0F02;padding:10px 14px;font-family:'Courier New',monospace;font-size:12px;color:#D4A82A;border-left:3px solid #B8860B;line-height:1.85;margin:0;">RUNRIGHT_VCPUS=4
+        <pre style="background:#1A0F02;padding:10px 14px;font-family:'Courier New',monospace;font-size:12px;color:#D4A82A;border-left:3px solid #B8860B;line-height:1.85;margin:0;overflow-x:auto;max-width:100%;white-space:pre;">RUNRIGHT_VCPUS=4
 RUNRIGHT_MEMORY_GIB=16</pre>
       </div>
     </div>
@@ -508,7 +555,7 @@ RUNRIGHT_MEMORY_GIB=16</pre>
   <section class="section">
     <p style="font-family:var(--deco);font-size:11px;letter-spacing:5px;color:var(--text-light);text-align:center;margin-bottom:12px;">SAVINGS CALCULATOR</p>
     <h2 style="text-align:center;margin-bottom:8px;">How much could you save?</h2>
-    <p style="text-align:center;color:var(--text-mid);margin-bottom:48px;font-size:15px;">Based on typical CI job utilisation (p95 CPU ~30%, p95 RAM ~40%).</p>
+    <p style="text-align:center;color:var(--text-mid);margin-bottom:48px;font-size:15px;">Based on typical CI job utilisation (p95 CPU 30%, p95 RAM 40%).</p>
     <div class="calc-grid">
       <!-- Controls -->
       <div class="calc-input-group">
@@ -555,7 +602,7 @@ RUNRIGHT_MEMORY_GIB=16</pre>
           <p class="calc-metric-val" id="out-after" style="font-size:28px;">—</p>
           <p class="calc-sub" id="out-pct"></p>
         </div>
-        <div class="calc-disclaimer">Estimates use p95 usage at ~30% CPU / ~40% RAM headroom. Actual savings vary by workload.</div>
+        <div class="calc-disclaimer">Estimates use p95 usage at 30% CPU / 40% RAM headroom. Actual savings vary by workload.</div>
       </div>
     </div>
   </section>
