@@ -743,6 +743,10 @@ RUNRIGHT_MEMORY_GIB=16</pre>
         <div class="faq-q">I already use Datadog. Do I need the RunRight backend?</div>
         <p class="faq-a">No. Use <code>--export otlp</code> with <code>OTEL_EXPORTER_OTLP_ENDPOINT</code> pointing at your existing collector. The backend and Postgres are only needed for the self-hosted RunRight dashboard.</p>
       </div>
+      <div class="faq-item">
+        <div class="faq-q">What data does RunRight collect?</div>
+        <p class="faq-a">Only CI resource metrics: CPU usage, memory (RSS), disk I/O, network I/O, thread count, and wall-clock runtime per job, sampled from <code>/proc</code>. No source code, environment variables, secrets, or application output is read or transmitted.</p>
+      </div>
     </div>
   </section>
 
