@@ -4,77 +4,119 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pricing — RunRight</title>
-  <meta name="description" content="RunRight is free. No seats, no usage caps, no SaaS. Self-hosted on your own infrastructure." />
+  <meta name="description" content="RunRight is free. No seats, no usage caps, no SaaS. Self-hosted on your infrastructure." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* PricingPage.css */
+    .pp-root { display:flex; flex-direction:column; min-height:100vh; background:var(--lp-bg); color:var(--lp-text); font-family:'Lato',system-ui,sans-serif; }
+    .pp-hero { text-align:center; padding:32px 48px 20px; border-bottom:1px solid var(--lp-border); }
+    .pp-eyebrow { font-family:'Bebas Neue',Impact,sans-serif; font-size:12px; letter-spacing:5px; color:#9A7B5A; margin:0 0 10px; }
+    .pp-title { font-family:'Playfair Display',Georgia,serif; font-size:clamp(26px,3.5vw,40px); font-weight:900; color:var(--lp-text); line-height:1.05; margin:0 0 10px; letter-spacing:-1px; }
+    .pp-sub { font-size:15px; color:var(--lp-text-mid); max-width:520px; margin:0 auto; line-height:1.7; }
+    .pp-content { flex:1; max-width:480px; width:100%; margin:24px auto; padding:0 24px; }
+    .pp-card { border:2px solid var(--lp-text); background:var(--lp-paper); padding:32px 36px; box-shadow:6px 6px 0 rgba(44,26,14,.1); margin-bottom:32px; }
+    .pp-plan-label { font-family:'Bebas Neue',Impact,sans-serif; font-size:11px; letter-spacing:4px; color:#9A7B5A; margin-bottom:8px; }
+    .pp-price { font-family:'Playfair Display',Georgia,serif; font-size:40px; font-weight:900; color:var(--lp-text); line-height:1; letter-spacing:-2px; margin-bottom:4px; }
+    .pp-price-sub { font-size:13px; color:#9A7B5A; margin-bottom:16px; }
+    .pp-features { list-style:none; padding:0; margin:0 0 20px; }
+    .pp-feature-item { display:flex; align-items:center; gap:14px; font-size:13.5px; color:var(--lp-text); padding:7px 0; border-bottom:1px solid var(--lp-border); }
+    .pp-feature-item:first-child { border-top:1px solid var(--lp-border); }
+    .pp-check { color:#C23B22; font-weight:700; font-size:16px; flex-shrink:0; width:16px; text-align:center; }
+    .pp-github-btn { display:inline-flex; align-items:center; gap:8px; background:#2C1A0E; color:#FBF0DC; padding:10px 24px; font-family:'Bebas Neue',Impact,sans-serif; font-size:14px; letter-spacing:2px; text-decoration:none; box-shadow:3px 3px 0 rgba(44,26,14,.15); transition:background .15s; }
+    .pp-github-btn:hover { background:#C23B22; }
+    .pp-note { background:var(--lp-paper); border:1px solid var(--lp-border); border-left:3px solid #2C1A0E; padding:24px 28px; }
+    .pp-note-label { font-family:'Bebas Neue',Impact,sans-serif; font-size:11px; letter-spacing:3px; color:var(--lp-text); margin-bottom:10px; }
+    .pp-note-text { font-size:14px; color:var(--lp-text-mid); line-height:1.85; margin:0 0 14px; }
+    .pp-note-link { font-family:'Bebas Neue',Impact,sans-serif; font-size:12px; letter-spacing:1.5px; color:var(--lp-text); text-decoration:none; transition:color .12s; }
+    .pp-note-link:hover { color:#C23B22; }
+    .pp-footer { border-top:1px solid var(--lp-border); padding:20px 48px; display:flex; justify-content:space-between; align-items:center; font-family:'Bebas Neue',Impact,sans-serif; font-size:11px; letter-spacing:2px; color:var(--lp-text-light); }
+    .pp-footer-link { color:var(--lp-text-light); text-decoration:none; transition:color .12s; }
+    .pp-footer-link:hover { color:var(--lp-text); }
+    @media (max-width:600px) {
+      .pp-hero { padding:56px 24px 48px; }
+      .pp-content { margin:40px auto; }
+      .pp-card { padding:32px 24px; }
+      .pp-footer { padding:16px 20px; flex-direction:column; gap:10px; text-align:center; }
+    }
+  </style>
 </head>
 <body>
+<div class="lp-root pp-root" id="root">
 
-<nav class="nav">
-  <a href="/" class="nav-logo">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    RUNRIGHT
-  </a>
-  <a href="pricing.html" class="active">PRICING</a>
-  <a href="compare.html">COMPARE</a>
-  <a href="install.html">INSTALL</a>
-  <a href="https://github.com/gbudjeakp/run-right" class="nav-github" aria-label="GitHub" target="_blank" rel="noopener">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
-  </a>
-  <button class="dark-btn" id="dark-toggle" aria-label="Toggle dark mode">
-    <svg id="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg id="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-  </button>
-</nav>
+  <nav class="pnav">
+    <a href="index.html" class="pnav-logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="4" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="12" x2="17.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="12" x2="17.2" y2="7.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+      RUNRIGHT
+    </a>
+    <div class="pnav-right">
+      <a href="compare.html" class="pnav-link pnav-hide-mobile">Compare</a>
+      <a href="pricing.html" class="pnav-link pnav-hide-mobile">Pricing</a>
+      <a href="install.html" class="pnav-link pnav-hide-mobile">Install</a>
+      <a href="https://github.com/gbudjeakp/run-right" class="pnav-link pnav-hide-mobile pnav-github" aria-label="GitHub repository" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
+      </a>
+      <button class="pnav-theme" id="dark-toggle" aria-label="Toggle dark mode">
+        <svg id="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
 
-<div class="page">
-  <section class="section" style="text-align:center;border-bottom:none;padding-bottom:32px;">
-    <p class="eyebrow" style="text-align:center;">PRICING</p>
-    <h1 style="font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:900;margin-bottom:12px;">It's free.</h1>
-    <p style="color:var(--text-mid);font-size:16px;max-width:480px;margin:0 auto 48px;">No seats. No usage caps. No third-party SaaS. Runs entirely on your infrastructure.</p>
+  <section class="pp-hero">
+    <p class="pp-eyebrow">PRICING</p>
+    <h1 class="pp-title">It&rsquo;s free.</h1>
+    <p class="pp-sub">No seats. No usage caps. No third-party SaaS. Runs entirely on your infrastructure.</p>
+  </section>
 
-    <div class="price-card">
-      <p class="eyebrow" style="text-align:center;">OPEN SOURCE</p>
-      <div class="price-number">$0</div>
-      <p class="price-sub">per month &middot; per seat &middot; per run</p>
-      <ul class="feature-list">
-        <li><span class="check">✓</span> Unlimited CI jobs &amp; runs</li>
-        <li><span class="check">✓</span> AWS + GCP machine catalog (160+ types)</li>
-        <li><span class="check">✓</span> Kubernetes resource recommendations</li>
-        <li><span class="check">✓</span> Spot / preemptible pricing estimates</li>
-        <li><span class="check">✓</span> Slack webhook notifications</li>
-        <li><span class="check">✓</span> Weekly savings digest</li>
-        <li><span class="check">✓</span> Self-hosted dashboard &amp; Postgres</li>
-        <li><span class="check">✓</span> OTLP / Prometheus export</li>
-        <li><span class="check">✓</span> Source available on GitHub</li>
+  <div class="pp-content">
+
+    <div class="pp-card">
+      <div class="pp-plan-label">SELF-HOSTED</div>
+      <div class="pp-price">$0</div>
+      <div class="pp-price-sub">per month &middot; per seat &middot; per run</div>
+      <ul class="pp-features">
+        <li class="pp-feature-item"><span class="pp-check">+</span>Unlimited job runs and history</li>
+        <li class="pp-feature-item"><span class="pp-check">+</span>Unlimited team members</li>
+        <li class="pp-feature-item"><span class="pp-check">+</span>Full AWS + GCP catalog (160+ types)</li>
+        <li class="pp-feature-item"><span class="pp-check">+</span>All CI platform integrations</li>
+        <li class="pp-feature-item"><span class="pp-check">+</span>Your data stays on your servers</li>
+        <li class="pp-feature-item"><span class="pp-check">+</span>Source available on GitHub</li>
       </ul>
-      <a href="install.html" class="btn" style="display:block;text-align:center;">Get started &rarr;</a>
+      <a href="https://github.com/gbudjeakp/run-right" target="_blank" rel="noopener noreferrer" class="pp-github-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
+        Star on GitHub
+      </a>
     </div>
 
-    <p style="color:var(--text-light);font-size:13px;margin-top:32px;">
-      Ready to get started? See the <a href="install.html" style="color:var(--text-mid);text-underline-offset:3px;">install options &rarr;</a>
-    </p>
-  </section>
-</div>
+    <div class="pp-note">
+      <div class="pp-note-label">Ready to get started?</div>
+      <p class="pp-note-text">Install in under two minutes. Works with GitHub Actions, Jenkins, CircleCI, and any CI platform that runs shell commands.</p>
+      <a href="install.html" class="pp-note-link">See install options &rarr;</a>
+    </div>
 
-<footer>
-  <span>RUNRIGHT &copy; 2026</span>
-  <div style="display:flex;gap:24px;">
-    <a href="pricing.html">PRICING</a>
-    <a href="compare.html">COMPARE</a>
-    <a href="install.html">INSTALL</a>
-    <a href="https://github.com/gbudjeakp/run-right" target="_blank" rel="noopener">GITHUB</a>
   </div>
-</footer>
 
+  <footer class="pp-footer">
+    <span style="display:flex;align-items:center;gap:8px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="4" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="12" x2="17.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="12" x2="17.2" y2="7.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+      RUNRIGHT
+    </span>
+    <a href="index.html" class="pp-footer-link">Back to home</a>
+  </footer>
+
+</div>
 <script>
-  const stored = localStorage.getItem('rr-dark');
-  if (stored === 'true') applyDark(true);
+  const root = document.getElementById('root');
+  if (localStorage.getItem('rr-dark') === 'true') applyDark(true);
   document.getElementById('dark-toggle').addEventListener('click', () => {
-    const next = !document.body.classList.contains('dark');
-    applyDark(next); localStorage.setItem('rr-dark', next);
+    const next = !root.classList.contains('lp-dark');
+    applyDark(next);
+    localStorage.setItem('rr-dark', String(next));
   });
   function applyDark(on) {
-    document.body.classList.toggle('dark', on);
+    root.classList.toggle('lp-dark', on);
     document.getElementById('icon-moon').style.display = on ? 'none' : '';
     document.getElementById('icon-sun').style.display  = on ? '' : 'none';
   }

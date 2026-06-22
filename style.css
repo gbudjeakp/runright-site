@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@700;900&family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap');
+
+/* ── CSS Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html, body { width: 100%; overflow-x: hidden; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+img, svg { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; }
 
 :root {
   --cream:      #FBF0DC;
@@ -30,6 +38,134 @@
   --text-light: #9A7B5A;
   --border:     #3D2810;
   --border-dk:  #5A3A18;
+}
+
+/* ── lp-root vars (React LandingPage.css parity) ── */
+.lp-root {
+  --lp-bg:         #FBF0DC;
+  --lp-paper:      #FFFDF7;
+  --lp-paper-alt:  #F3E2C2;
+  --lp-text:       #2C1A0E;
+  --lp-text-mid:   #6B4226;
+  --lp-text-light: #9A7B5A;
+  --lp-border:     #D4B896;
+  --lp-works-bg:   #F3E2C2;
+  --lp-dark-strip: #2C1A0E;
+  /* also expose --cream aliases so index.html inline styles work */
+  --cream:      #FBF0DC;
+  --cream-alt:  #F3E2C2;
+  --paper:      #FFFDF7;
+  --text:       #2C1A0E;
+  --text-mid:   #6B4226;
+  --text-light: #9A7B5A;
+  --border:     #D4B896;
+  --border-dk:  #B8946A;
+  background: var(--lp-bg);
+  color: var(--lp-text);
+  font-family: 'Lato', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.lp-root.lp-dark {
+  --lp-bg:         #130C05;
+  --lp-paper:      #1E1209;
+  --lp-paper-alt:  #251708;
+  --lp-text:       #F5E4C8;
+  --lp-text-mid:   #C09870;
+  --lp-text-light: #9A7B5A;
+  --lp-border:     #3D2810;
+  --lp-works-bg:   #1E1209;
+  --lp-dark-strip: #0A0603;
+  /* also expose --cream aliases dark values */
+  --cream:      #130C05;
+  --cream-alt:  #1E1209;
+  --paper:      #231810;
+  --text:       #F5E4C8;
+  --text-mid:   #C09870;
+  --text-light: #9A7B5A;
+  --border:     #3D2810;
+  --border-dk:  #5A3A18;
+}
+
+/* ── PageNav (pnav) ── */
+.pnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  height: 56px;
+  border-bottom: 1px solid var(--lp-border);
+  background: var(--lp-bg);
+}
+.pnav-logo {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: var(--lp-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.pnav-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.pnav-link {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--lp-text-mid);
+  text-decoration: none;
+  transition: color .12s;
+  white-space: nowrap;
+}
+.pnav-link:hover { color: var(--lp-text); }
+.pnav-signin {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #FBF0DC;
+  background: #2C1A0E;
+  border: 1.5px solid #2C1A0E;
+  padding: 7px 18px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  white-space: nowrap;
+}
+.pnav-signin:hover { background: #C23B22; border-color: #C23B22; }
+.pnav-theme {
+  background: none;
+  border: 1.5px solid var(--lp-border);
+  color: var(--lp-text-light);
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color .15s, color .15s;
+  padding: 0;
+  flex-shrink: 0;
+}
+.pnav-theme:hover { border-color: var(--lp-text); color: var(--lp-text); }
+.pnav-github {
+  display: inline-flex !important;
+  align-items: center;
+  color: var(--lp-text-mid);
+  transition: color .12s;
+}
+.pnav-github:hover { color: var(--lp-text); }
+@media (max-width: 640px) {
+  .pnav { padding: 0 20px; }
+  .pnav-link.pnav-hide-mobile { display: none; }
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -109,50 +245,57 @@ a { color: inherit; }
 .hero {
   display: flex;
   align-items: center;
-  gap: 64px;
+  gap: 164px;
   padding: 80px 0 64px;
   border-bottom: 1px solid var(--border);
 }
 .hero-left { flex: 1; min-width: 0; }
-.hero-right { flex: 0 0 380px; }
+.hero-right { flex: 0 0 320px; }
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--deco);
   font-size: 11px;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   color: var(--text-light);
-  margin-bottom: 16px;
+  border: 1px solid var(--lp-border);
+  padding: 5px 14px;
+  margin-bottom: 24px;
 }
 .hero h1 {
   font-family: var(--serif);
   font-size: clamp(36px, 4.5vw, 56px);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
   color: var(--text);
   margin-bottom: 20px;
 }
 .hero-sub {
-  font-size: 17px;
+  font-size: 16px;
   color: var(--text-mid);
   max-width: 440px;
-  margin-bottom: 32px;
-  line-height: 1.65;
+  margin: 0 0 32px;
+  line-height: 1.75;
+  font-weight: 400;
 }
 .btn {
   display: inline-block;
   background: var(--red);
-  color: var(--cream);
-  padding: 12px 28px;
+  color: #FBF0DC;
+  padding: 13px 38px;
   font-family: var(--deco);
   font-size: 15px;
-  letter-spacing: 1.5px;
+  letter-spacing: 3px;
   text-decoration: none;
-  box-shadow: var(--shadow);
-  transition: background .15s, transform .1s, box-shadow .1s;
+  border: none;
+  cursor: pointer;
+  transition: background .15s, transform .08s;
 }
 .btn:hover {
   background: var(--red-dark);
-  transform: translate(1px,1px);
-  box-shadow: 2px 2px 0 rgba(92,58,30,.18);
+  transform: translateY(-1px);
 }
 .btn-outline {
   background: transparent;
@@ -178,19 +321,21 @@ a { color: inherit; }
 
 /* ── Section ── */
 .section {
-  padding: 64px 0;
+  padding: 72px 0;
   border-bottom: 1px solid var(--border);
 }
 .section h2 {
   font-family: var(--serif);
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 900;
   color: var(--text);
   margin-bottom: 8px;
 }
 .section-sub {
-  color: var(--text-mid);
-  margin-bottom: 40px;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text-light);
+  margin-bottom: 52px;
   max-width: 540px;
 }
 
@@ -364,7 +509,7 @@ p code, li code {
 
 /* ── Footer ── */
 footer {
-  padding: 32px 48px;
+  padding: 28px 60px;
   border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -372,30 +517,47 @@ footer {
   flex-wrap: wrap;
   gap: 12px;
 }
-footer span {
+footer span, footer > a {
   font-family: var(--deco);
   font-size: 12px;
-  letter-spacing: 1.5px;
-  color: var(--text-light);
-}
-footer a {
-  font-family: var(--deco);
-  font-size: 12px;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   color: var(--text-light);
   text-decoration: none;
+}
+footer > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   transition: color .15s;
 }
-footer a:hover { color: var(--text); }
+footer > a:hover { color: var(--text); }
+footer span a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-family: var(--deco);
+  letter-spacing: 1px;
+  transition: color .15s;
+}
+footer span a:hover { color: var(--red); }
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .nav { padding: 0 20px; gap: 16px; }
   .page { padding: 0 20px; }
-  .hero { flex-direction: column; gap: 32px; padding: 48px 0 40px; }
-  .hero-right { display: none; }
+  .hero { flex-direction: column; gap: 40px; padding: 48px 0 40px; }
+  .hero-visual { display: none; }
   .docs-layout { flex-direction: column; }
   .docs-sidebar { display: none; }
   .strip { padding: 24px 20px; }
   footer { padding: 24px 20px; }
+}
+@media (max-width: 600px) {
+  .page { padding: 0 16px; }
+  .proof-bar { padding: 13px 16px; gap: 20px; }
+  .section { padding: 52px 0; }
+  footer { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: clamp(28px, 8vw, 36px); }
+  .pnav { padding: 0 16px; }
 }

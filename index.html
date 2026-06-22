@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RunRight — Stop guessing at CI machine sizes</title>
   <meta name="description" content="RunRight monitors every CI job and maps your actual p95 usage to the right AWS or GCP instance type — automatically, on every run." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="style.css" />
   <style>
     /* ── Page-level extras not in shared style.css ── */
@@ -28,9 +30,11 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 0 48px;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 60px;
     }
-    .divider-ornament .line { flex: 1; height: 1px; background: var(--border); }
+    .divider-ornament .line { flex: 1; height: 1px; background: var(--lp-border); }
     .divider-ornament span {
       font-family: var(--deco);
       font-size: 13px;
@@ -95,7 +99,7 @@
       font-family: var(--deco); font-size: 13px; letter-spacing: 1.5px;
       cursor: pointer; margin-bottom: -2px; transition: color .12s, background .12s;
     }
-    .ci-tab.active { background: var(--text); color: var(--cream); border-bottom-color: var(--text); }
+    .ci-tab.active { background: #2C1A0E; color: #FBF0DC; border-bottom-color: #2C1A0E; }
     .ci-tab:hover:not(.active) { color: var(--text); }
     .ci-panel { display: none; }
     .ci-panel.active { display: block; }
@@ -117,7 +121,7 @@
       border-right: 1px solid #3a2510; border-bottom: 1px solid #3a2510;
       padding: 16px 20px; font-family: 'Courier New', monospace;
       font-size: 13px; color: #D4A82A; line-height: 1.9;
-      margin: 0; overflow-x: auto; white-space: pre;
+      margin: 0; overflow-x: auto; white-space: pre; max-width: 100%;
     }
     /* Install steps */
     .install-step { display: flex; gap: 28px; padding: 36px 0; border-bottom: 1px solid var(--border); }
@@ -127,13 +131,13 @@
     .install-title { font-family: var(--serif); font-weight: 700; font-size: 18px; color: var(--text); margin-bottom: 8px; }
     .install-desc { font-size: 14px; color: var(--text-mid); line-height: 1.85; margin-bottom: 14px; }
     /* Compare teaser */
-    .compare-teaser { border-top: 1px solid var(--border); padding: 48px; text-align: center; }
-    .compare-teaser p { font-size: 15px; color: var(--text-mid); margin: 0 0 14px; line-height: 1.7; }
-    .compare-teaser a { font-family: var(--deco); font-size: 13px; letter-spacing: 2px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
-    .compare-teaser a:hover { color: var(--red); border-color: var(--red); }
+    .compare-teaser { background: #2C1A0E; padding: 52px 48px; text-align: center; }
+    .compare-teaser p { font-size: 15px; color: rgba(251,240,220,.6); margin: 0 0 14px; line-height: 1.7; }
+    .compare-teaser a { font-family: var(--deco); font-size: 13px; letter-spacing: 2px; color: #FBF0DC; text-decoration: none; border-bottom: 1px solid rgba(251,240,220,.3); padding-bottom: 2px; }
+    .compare-teaser a:hover { color: rgba(251,240,220,.85); border-color: rgba(251,240,220,.6); }
     /* Pricing dark strip */
     .pricing-strip { background: #2C1A0E; padding: 52px 48px; text-align: center; }
-    .pricing-strip .eyebrow { font-family: var(--deco); font-size: 12px; letter-spacing: 4px; color: rgba(251,240,220,.4); margin-bottom: 12px; }
+    .pricing-strip .eyebrow { display:block; border:none; padding:0; font-family: var(--deco); font-size: 12px; letter-spacing: 4px; color: rgba(251,240,220,.4); margin-bottom: 12px; }
     .pricing-strip .price-big { font-family: var(--serif); font-weight: 900; font-size: clamp(36px,5vw,52px); color: #FBF0DC; line-height: 1; margin-bottom: 14px; }
     .pricing-strip p { font-size: 15px; color: rgba(251,240,220,.6); margin: 0 0 28px; line-height: 1.7; }
     .pricing-strip a { font-family: var(--deco); font-size: 13px; letter-spacing: 2px; color: #FBF0DC; text-decoration: none; border-bottom: 1px solid rgba(251,240,220,.3); padding-bottom: 2px; }
@@ -173,31 +177,37 @@
       .works-card-full { grid-column: auto; }
       .calc-grid { grid-template-columns: 1fr; gap: 28px; }
       .calc-row { grid-template-columns: 1fr 1fr; }
+      .install-step { flex-direction: column; gap: 12px; }
+      .install-num { font-size: 36px; width: auto; }
     }
     @media (max-width: 600px) {
       .feature-strip-inner { grid-template-columns: 1fr; }
       .calc-row { grid-template-columns: 1fr; }
       .proof-bar { gap: 20px; }
+      .ci-tab { font-size: 11px; padding: 8px 12px; }
     }
   </style>
 </head>
 <body>
+<div class="lp-root" id="root">
 
-<nav class="nav">
-  <a href="/" class="nav-logo">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+<nav class="pnav">
+  <a href="index.html" class="pnav-logo">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="4" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="12" x2="17.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="12" x2="17.2" y2="7.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
     RUNRIGHT
   </a>
-  <a href="pricing.html">PRICING</a>
-  <a href="compare.html">COMPARE</a>
-  <a href="install.html">INSTALL</a>
-  <a href="https://github.com/gbudjeakp/run-right" class="nav-github" aria-label="GitHub" target="_blank" rel="noopener">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
-  </a>
-  <button class="dark-btn" id="dark-toggle" aria-label="Toggle dark mode">
-    <svg id="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg id="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-  </button>
+  <div class="pnav-right">
+    <a href="compare.html" class="pnav-link pnav-hide-mobile">Compare</a>
+    <a href="pricing.html" class="pnav-link pnav-hide-mobile">Pricing</a>
+    <a href="install.html" class="pnav-link pnav-hide-mobile">Install</a>
+    <a href="https://github.com/gbudjeakp/run-right" class="pnav-link pnav-hide-mobile pnav-github" aria-label="GitHub repository" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
+    </a>
+    <button class="pnav-theme" id="dark-toggle" aria-label="Toggle dark mode">
+      <svg id="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
 </nav>
 
 <div class="page">
@@ -225,7 +235,7 @@
         <div style="font-size:11px;color:#C4A882;">2 vCPU &middot; 2 GB &middot; $0.0042/min</div>
       </div>
       <div class="hv-label" style="margin-bottom:4px;">MONTHLY SAVINGS</div>
-      <div class="hv-big">~$18.40</div>
+      <div class="hv-big">$18.40</div>
     </div>
   </section>
 
@@ -233,14 +243,14 @@
 
 <!-- Social proof bar -->
 <div class="proof-bar">
-  <span>&#10022; 160+ AWS instances</span>
-  <span>&#10022; 60+ GCP instances</span>
-  <span>&#10022; Open Source</span>
-  <span>&#10022; Self-Hosted</span>
+  <span>&#10070; 160+ AWS instances</span>
+  <span>&#10070; 60+ GCP instances</span>
+  <span>&#10070; Open Source</span>
+  <span>&#10070; Self-Hosted</span>
 </div>
 
 <!-- Divider ornament -->
-<div class="divider-ornament" style="padding-top:0;padding-bottom:0;max-width:1100px;margin:0 auto;">
+<div class="divider-ornament">
   <div class="line"></div>
   <span>&#10022; HOW IT WORKS &#10022;</span>
   <div class="line"></div>
@@ -311,7 +321,7 @@
 <div class="works-section">
   <div style="max-width:900px;margin:0 auto;">
     <h2 style="font-family:var(--serif);font-size:32px;font-weight:900;color:var(--text);text-align:center;margin-bottom:8px;">Works Everywhere You Run CI</h2>
-    <p style="text-align:center;color:var(--text-mid);margin-bottom:40px;font-size:17px;">Bare VMs, containers, K8s pods, DinD &mdash; detection adapts to the environment automatically.</p>
+    <p style="text-align:center;color:var(--text-light);margin-bottom:52px;font-size:17px;">Bare VMs, containers, K8s pods, DinD &mdash; detection adapts to the environment automatically.</p>
     <div class="works-grid">
       <div class="works-card">
         <div class="works-card-head">
@@ -356,7 +366,7 @@ RUNRIGHT_MEMORY_GIB=16</pre>
   <!-- CI Integrations -->
   <section class="section">
     <h2 style="margin-bottom:6px;">Works in any CI</h2>
-    <p class="section-sub">Native GitHub Action or a two-line shell snippet. Pick whichever fits your stack.</p>
+    <p class="section-sub" style="text-align:left;margin-bottom:24px;">Native GitHub Action or a two-line shell snippet. Pick whichever fits your stack.</p>
     <div class="ci-tabs-bar">
       <button class="ci-tab active" data-tab="github">GitHub Actions</button>
       <button class="ci-tab" data-tab="gitlab">GitLab CI</button>
@@ -484,11 +494,15 @@ RUNRIGHT_MEMORY_GIB=16</pre>
     </div>
   </section>
 
-  <!-- Compare teaser -->
-  <div class="compare-teaser">
-    <p>How does RunRight compare to Datadog, Grafana, Sentry, and AWS Cost Tools?</p>
-    <a href="compare.html">See the full comparison &rarr;</a>
-  </div>
+</div>
+
+<!-- Compare teaser -->
+<div class="compare-teaser">
+  <p>How does RunRight compare to Datadog, Grafana, Sentry, and AWS Cost Tools?</p>
+  <a href="compare.html">See the full comparison &rarr;</a>
+</div>
+
+<div class="page">
 
   <!-- Savings Calculator -->
   <section class="section">
@@ -588,30 +602,30 @@ RUNRIGHT_MEMORY_GIB=16</pre>
 
 <footer>
   <span style="display:flex;align-items:center;gap:8px;">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><line x1="12" y1="4" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="12" x2="6.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="12" x2="17.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="12" x2="17.2" y2="7.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
     RUNRIGHT
   </span>
-  <span>BUILT BY <a href="https://github.com/gbudjeakp" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;font-family:var(--deco);letter-spacing:1px;">SEBASTIAN GBUDJE</a></span>
+  <span>BUILT BY <a href="https://github.com/gbudjeakp" target="_blank" rel="noopener noreferrer">SEBASTIAN GBUDJE</a></span>
   <span>MIT LICENSE</span>
-  <div style="display:flex;gap:24px;">
-    <a href="pricing.html">PRICING</a>
-    <a href="compare.html">COMPARE</a>
-    <a href="install.html">INSTALL</a>
-    <a href="https://github.com/gbudjeakp/run-right" target="_blank" rel="noopener">GITHUB</a>
-  </div>
+  <a href="https://github.com/gbudjeakp/run-right" target="_blank" rel="noopener noreferrer" aria-label="RunRight on GitHub">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
+    GITHUB
+  </a>
 </footer>
+
+</div><!-- /lp-root -->
 
 <script>
   // ── Dark mode ──
-  const stored = localStorage.getItem('rr-dark');
-  if (stored === 'true') applyDark(true);
+  const root = document.getElementById('root');
+  if (localStorage.getItem('rr-dark') === 'true') applyDark(true);
   document.getElementById('dark-toggle').addEventListener('click', () => {
-    const next = !document.body.classList.contains('dark');
+    const next = !root.classList.contains('lp-dark');
     applyDark(next);
     localStorage.setItem('rr-dark', String(next));
   });
   function applyDark(on) {
-    document.body.classList.toggle('dark', on);
+    root.classList.toggle('lp-dark', on);
     document.getElementById('icon-moon').style.display = on ? 'none' : '';
     document.getElementById('icon-sun').style.display  = on ? '' : 'none';
   }
@@ -664,7 +678,7 @@ RUNRIGHT_MEMORY_GIB=16</pre>
     document.getElementById('out-current').textContent = fmt(currentMonthly);
     document.getElementById('out-savings').textContent = fmt(savings);
     document.getElementById('out-after').textContent   = fmt(after);
-    document.getElementById('out-pct').textContent     = '~' + Math.round(m.savingsPct * 100) + '% reduction on right-sized machines';
+    document.getElementById('out-pct').textContent     = Math.round(m.savingsPct * 100) + '% reduction on right-sized machines';
   }
   document.getElementById('calc-machine').addEventListener('change', updateCalc);
   updateCalc();
