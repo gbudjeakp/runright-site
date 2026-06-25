@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Install - RunRight Docs</title>
-  <meta name="description" content="Install RunRight in under two minutes. GitHub Actions, GitLab CI, Jenkins, Kubernetes, Helm, and Terraform." />
+  <title>Install RunRight | CI Runner Right-Sizing Setup Guide</title>
+  <meta name="description" content="Install RunRight in minutes across GitHub Actions, GitLab CI, Jenkins, Kubernetes, Helm, and Terraform. Start with no backend, then enable policy enforcement and routed alerts." />
+  <link rel="canonical" href="https://runright.dev/pages/install.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Install RunRight | CI Runner Right-Sizing Setup Guide" />
+  <meta property="og:description" content="Step-by-step setup for CI profiling, runner recommendations, policy enforcement, and Slack-routed alerts." />
+  <meta property="og:url" content="https://runright.dev/pages/install.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Install RunRight | CI Runner Right-Sizing Setup Guide" />
+  <meta name="twitter:description" content="Get RunRight running quickly on any CI with optional backend integration for policy and alert automation." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="../styles/style.css" />
@@ -173,7 +181,7 @@
     <div class="pnav-right">
       <a href="compare.html" class="pnav-link pnav-hide-mobile">Compare</a>
       <a href="pricing.html" class="pnav-link pnav-hide-mobile">Pricing</a>
-      <a href="install.html" class="pnav-link pnav-hide-mobile">Install</a>
+      <a href="install.html" class="pnav-link pnav-hide-mobile">Docs</a>
       <a href="https://github.com/gbudjeakp/run-right" class="pnav-link pnav-hide-mobile pnav-github" aria-label="GitHub repository" target="_blank" rel="noopener">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
       </a>
@@ -190,7 +198,7 @@
     <div class="pnav-mobile" id="pnav-mobile" aria-hidden="true">
       <a href="compare.html" class="pnav-mobile-link">Compare</a>
       <a href="pricing.html" class="pnav-mobile-link">Pricing</a>
-      <a href="install.html" class="pnav-mobile-link">Install</a>
+      <a href="install.html" class="pnav-mobile-link">Docs</a>
       <a href="https://github.com/gbudjeakp/run-right" class="pnav-mobile-link" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
         GitHub
@@ -241,26 +249,27 @@
       <div class="ip-quickstart">
         <div class="ip-qs-header">
           <span class="ip-qs-badge">60-SECOND INSTALL</span>
-          <span class="ip-qs-sub">Works on any CI runner. No backend required.</span>
+          <span class="ip-qs-sub">Works on any CI runner. Start file-only, then add backend policy + alerts.</span>
         </div>
         <div class="ip-qs-code"><span class="ip-qs-comment"># Add to any job in .github/workflows/ci.yml</span>
 <span class="ip-qs-key">- uses</span><span class="ip-qs-punct">: </span><span class="ip-qs-val">gbudjeakp/run-right@v1</span>
   <span class="ip-qs-key">with</span><span class="ip-qs-punct">:</span>
     <span class="ip-qs-key">run</span><span class="ip-qs-punct">: </span><span class="ip-qs-val">make build</span>  <span class="ip-qs-comment"># ← your command here</span></div>
-        <p class="ip-qs-result">Recommendations appear in the <strong>Job Summary</strong> tab after the run. No config, no API key, no database.</p>
+        <p class="ip-qs-result">Recommendations appear in the <strong>Job Summary</strong> tab after the run. No config, no API key, no database. Add backend later for policy checks and routed alerts.</p>
       </div>
 
       <!-- Overview -->
       <section id="overview" class="ip-section">
         <p class="ip-eyebrow">Documentation</p>
         <h1 class="ip-h1">Install RunRight</h1>
-        <p class="ip-lead">Drop one step into any CI workflow. RunRight monitors your job in the background, detects the machine it ran on, and recommends a right-sized alternative - saving you money without guesswork.</p>
+        <p class="ip-lead">Drop one step into any CI workflow on GitHub, GitLab, Jenkins, CircleCI, Kubernetes, or any CI platform. RunRight monitors your job in the background, detects the machine it ran on, and recommends a right-sized alternative - saving you money without guesswork.</p>
         <p class="ip-lead" style="margin-top:0;">No backend or API key needed to start. Just add one step, and recommendations appear in your job log and step summary.</p>
         <div class="ip-overview-grid">
           <div class="ip-overview-card"><strong class="ip-overview-title">2 min setup</strong><p class="ip-overview-body">One action step. No sidecar, no DaemonSet, no infra changes.</p></div>
           <div class="ip-overview-card"><strong class="ip-overview-title">No backend required</strong><p class="ip-overview-body">Recommendations work with file export alone. Backend is optional.</p></div>
-          <div class="ip-overview-card"><strong class="ip-overview-title">API key optional</strong><p class="ip-overview-body">Auth is disabled by default. Only enable it when you self-host.</p></div>
-          <div class="ip-overview-card"><strong class="ip-overview-title">Any runner</strong><p class="ip-overview-body">GitHub-hosted, self-hosted, GitLab, and Kubernetes runners are all supported.</p></div>
+          <div class="ip-overview-card"><strong class="ip-overview-title">API key optional</strong><p class="ip-overview-body">Auth is disabled by default. Enable it when you self-host policy and alert automation.</p></div>
+          <div class="ip-overview-card"><strong class="ip-overview-title">Any runner</strong><p class="ip-overview-body">GitHub Actions, GitLab CI, Jenkins, CircleCI, self-hosted VMs, and Kubernetes runners are all supported.</p></div>
+          <div class="ip-overview-card"><strong class="ip-overview-title">Policy + alert backend</strong><p class="ip-overview-body">Enable scoped policies (job/repo/global) and Slack destination alert routing once your backend is connected.</p></div>
         </div>
       </section>
 
