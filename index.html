@@ -325,6 +325,158 @@
       color: #9f5f2f;
       margin-right: 6px;
     }
+    .rank-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 360px;
+    }
+    .rank-table thead tr { border-bottom: 2px solid var(--border); }
+    .rank-table th {
+      text-align: left;
+      font-family: var(--deco);
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--text-light);
+      padding: 6px 10px 10px;
+      font-weight: 400;
+    }
+    .rank-table th:first-child,
+    .rank-table td:first-child { padding-left: 0; }
+    .rank-table th.num,
+    .rank-table td.num { text-align: right; }
+    .rank-table td {
+      padding: 10px;
+      color: var(--text-light);
+    }
+    .rank-table tr { border-bottom: 1px solid var(--border); }
+    .rank-table tbody tr:last-child { border-bottom: none; }
+    .rank-table td.instance {
+      color: var(--text-mid);
+      font-family: monospace;
+    }
+    .rank-table td.rank-num {
+      font-family: var(--deco);
+      font-size: 11px;
+      color: var(--text-light);
+    }
+    .rank-table tr.rank-best {
+      background: #fdf8f2;
+    }
+    .rank-table tr.rank-best td {
+      color: var(--text-mid);
+      padding-top: 11px;
+      padding-bottom: 11px;
+    }
+    .rank-table tr.rank-best td.instance {
+      color: var(--text);
+      font-weight: 700;
+    }
+    .rank-table td.savings-strong {
+      color: var(--red) !important;
+      font-weight: 700;
+    }
+    .rank-badge {
+      font-family: var(--deco);
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #9A7B5A;
+      background: var(--cream-alt);
+      border: 1px solid var(--border);
+      padding: 2px 7px;
+      border-radius: 999px;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .lp-root.lp-dark .rank-table thead tr {
+      border-bottom-color: #5e4422;
+    }
+    .lp-root.lp-dark .rank-table th {
+      color: #b78656;
+    }
+    .lp-root.lp-dark .rank-table tr {
+      border-bottom-color: #3f2b14;
+    }
+    .lp-root.lp-dark .rank-table td,
+    .lp-root.lp-dark .rank-table td.rank-num {
+      color: #c9a073;
+    }
+    .lp-root.lp-dark .rank-table td.instance {
+      color: #d7b88f;
+    }
+    .lp-root.lp-dark .rank-table tr.rank-best {
+      background: rgba(255,240,210,.06);
+    }
+    .lp-root.lp-dark .rank-table tr.rank-best td.instance {
+      color: #f5e4c8;
+    }
+    .lp-root.lp-dark .rank-badge {
+      color: #f0b680;
+      background: rgba(27,17,9,.78);
+      border-color: #7f5a30;
+    }
+    .lp-root.lp-dark .policy-card {
+      border-color: #4b3418;
+      background:
+        radial-gradient(180px 110px at 88% -10%, rgba(194,59,34,.16), transparent 70%),
+        radial-gradient(160px 95px at 8% 112%, rgba(27,51,97,.18), transparent 70%),
+        linear-gradient(180deg, #22160d 0%, #1a1109 100%);
+      box-shadow: 0 18px 40px rgba(0,0,0,.42);
+    }
+    .lp-root.lp-dark .policy-card::before {
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 22px,
+        rgba(255,220,170,.06) 22px,
+        rgba(255,220,170,.06) 23px
+      );
+      opacity: .22;
+    }
+    .lp-root.lp-dark .policy-card-head {
+      background: linear-gradient(90deg, #2f1f12 0%, #26180f 100%);
+      border-bottom-color: #4b3418;
+    }
+    .lp-root.lp-dark .policy-head-label { color: #c9a073; }
+    .lp-root.lp-dark .policy-card-body { color: #cfb391; }
+    .lp-root.lp-dark .policy-meta { color: #c9a073; }
+    .lp-root.lp-dark .policy-meta code {
+      background: #2d1d10;
+      border: 1px solid #4b3418;
+      color: #f5e4c8;
+    }
+    .lp-root.lp-dark .policy-chip {
+      color: #c9a073;
+      border-color: #5e4422;
+      background: rgba(27,17,9,.65);
+    }
+    .lp-root.lp-dark .policy-chip strong { color: #f5e4c8; }
+    .lp-root.lp-dark .policy-table th {
+      color: #b78656;
+      border-bottom-color: #5e4422;
+    }
+    .lp-root.lp-dark .policy-table td {
+      color: #d7b88f;
+      border-bottom-color: #3f2b14;
+    }
+    .lp-root.lp-dark .policy-table tr:nth-child(odd) td {
+      background: rgba(255,240,210,.03);
+    }
+    .lp-root.lp-dark .policy-table tbody tr:hover td {
+      background: rgba(255,220,170,.09);
+    }
+    .lp-root.lp-dark .policy-pill {
+      background: rgba(24,14,8,.82);
+      box-shadow: inset 0 -1px 0 rgba(255,255,255,.05);
+    }
+    .lp-root.lp-dark .policy-outcome {
+      background: linear-gradient(180deg, rgba(194,59,34,.17) 0%, rgba(194,59,34,.1) 100%);
+      border-color: #7f3f22;
+      color: #e2c39a;
+    }
+    .lp-root.lp-dark .policy-outcome strong {
+      color: #f0b680;
+    }
     /* CI tabs */
     .ci-tabs-bar { display: flex; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
     .ci-tab {
@@ -707,41 +859,41 @@
         <div class="output-meta" style="font-size:12px;color:var(--text-mid);margin-bottom:20px;display:flex;flex-wrap:wrap;gap:0 4px;"><span class="output-meta-item">Sampled 47 runs &nbsp;&middot;&nbsp;</span><span class="output-meta-item">p95 CPU: <strong style="color:var(--text);">1.2 cores</strong> &nbsp;&middot;&nbsp;</span><span class="output-meta-item">p95 RAM: <strong style="color:var(--text);">1.8 GB</strong> &nbsp;&middot;&nbsp;</span><span class="output-meta-item">Current: <code style="font-family:monospace;background:var(--cream-alt);padding:1px 5px;font-size:11px;">c5.xlarge</code> (4 vCPU &middot; 8 GB)</span></div>
         <!-- Table -->
         <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-        <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:360px;">
+        <table class="rank-table">
           <thead>
-            <tr style="border-bottom:2px solid var(--border);">
-              <th style="text-align:left;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px 0;font-weight:400;">RANK</th>
-              <th style="text-align:left;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px;font-weight:400;">INSTANCE</th>
-              <th class="output-col-vcpu" style="text-align:right;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px;font-weight:400;">VCPU</th>
-              <th class="output-col-ram" style="text-align:right;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px;font-weight:400;">RAM</th>
-              <th style="text-align:right;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 10px 10px;font-weight:400;">COST/MIN</th>
-              <th style="text-align:right;font-family:var(--deco);font-size:10px;letter-spacing:2px;color:var(--text-light);padding:6px 0 10px 10px;font-weight:400;">SAVINGS</th>
+            <tr>
+              <th>RANK</th>
+              <th>INSTANCE</th>
+              <th class="output-col-vcpu num">VCPU</th>
+              <th class="output-col-ram num">RAM</th>
+              <th class="num">COST/MIN</th>
+              <th class="num">SAVINGS</th>
             </tr>
           </thead>
           <tbody>
-            <tr style="background:#fdf8f2;border-bottom:1px solid var(--border);">
-              <td style="padding:11px 10px 11px 0;"><span style="font-family:var(--deco);font-size:10px;letter-spacing:1px;color:#9A7B5A;background:var(--cream-alt);border:1px solid var(--border);padding:2px 7px;">BEST FIT</span></td>
-              <td style="padding:11px 10px;font-weight:700;color:var(--text);font-family:monospace;">t4g.small</td>
-              <td class="output-col-vcpu" style="padding:11px 10px;text-align:right;color:var(--text-mid);">2</td>
-              <td class="output-col-ram" style="padding:11px 10px;text-align:right;color:var(--text-mid);">2 GB</td>
-              <td style="padding:11px 10px;text-align:right;color:var(--text-mid);">$0.0042</td>
-              <td style="padding:11px 0 11px 10px;text-align:right;font-weight:700;color:var(--red);">-78%</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:10px 10px 10px 0;font-family:var(--deco);font-size:11px;color:var(--text-light);">2</td>
-              <td style="padding:10px;color:var(--text-mid);font-family:monospace;">t3a.small</td>
-              <td class="output-col-vcpu" style="padding:10px;text-align:right;color:var(--text-light);">2</td>
-              <td class="output-col-ram" style="padding:10px;text-align:right;color:var(--text-light);">2 GB</td>
-              <td style="padding:10px;text-align:right;color:var(--text-light);">$0.0047</td>
-              <td style="padding:10px 0 10px 10px;text-align:right;color:var(--text-mid);">-76%</td>
+            <tr class="rank-best">
+              <td><span class="rank-badge">BEST FIT</span></td>
+              <td class="instance">t4g.small</td>
+              <td class="output-col-vcpu num">2</td>
+              <td class="output-col-ram num">2 GB</td>
+              <td class="num">$0.0042</td>
+              <td class="num savings-strong">-78%</td>
             </tr>
             <tr>
-              <td style="padding:10px 10px 10px 0;font-family:var(--deco);font-size:11px;color:var(--text-light);">3</td>
-              <td style="padding:10px;color:var(--text-mid);font-family:monospace;">t3.small</td>
-              <td class="output-col-vcpu" style="padding:10px;text-align:right;color:var(--text-light);">2</td>
-              <td class="output-col-ram" style="padding:10px;text-align:right;color:var(--text-light);">2 GB</td>
-              <td style="padding:10px;text-align:right;color:var(--text-light);">$0.0052</td>
-              <td style="padding:10px 0 10px 10px;text-align:right;color:var(--text-mid);">-73%</td>
+              <td class="rank-num">2</td>
+              <td class="instance">t3a.small</td>
+              <td class="output-col-vcpu num">2</td>
+              <td class="output-col-ram num">2 GB</td>
+              <td class="num">$0.0047</td>
+              <td class="num">-76%</td>
+            </tr>
+            <tr>
+              <td class="rank-num">3</td>
+              <td class="instance">t3.small</td>
+              <td class="output-col-vcpu num">2</td>
+              <td class="output-col-ram num">2 GB</td>
+              <td class="num">$0.0052</td>
+              <td class="num">-73%</td>
             </tr>
           </tbody>
         </table>
